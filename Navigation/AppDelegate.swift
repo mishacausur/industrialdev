@@ -23,23 +23,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = vc
         self.window!.makeKeyAndVisible()
         self.window!.backgroundColor = .white
+        print("didFinishLaunchingWithOptions")
         return true
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        
+        print("applicationWillEnterForeground")
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
+        print("applicationDidBecomeActive")
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        
+        print("applicationWillResignActive")
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        
+        print("applicationDidEnterBackground")
     }
     
 }
