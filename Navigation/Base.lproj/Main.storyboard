@@ -154,7 +154,7 @@
         <!--Feed-->
         <scene sceneID="pR1-4r-6ob">
             <objects>
-                <navigationController id="vyo-r6-qwt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationController" id="vyo-r6-qwt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Feed" image="house.fill" catalog="system" id="0HN-zR-0uF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jwt-CW-Jdi">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -277,7 +277,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="0O8-tr-oe2">
             <objects>
-                <tabBarController id="VVa-ty-c3K" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="VVa-ty-c3K" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fGo-88-qdc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

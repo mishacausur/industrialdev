@@ -17,10 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FeedViewController")
+      
+        let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController")
+    
         self.window!.rootViewController = vc
         self.window!.makeKeyAndVisible()
-        
+        self.window!.backgroundColor = .white
         return true
     }
     
