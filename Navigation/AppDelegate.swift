@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
+        // по умолчанию работа приложения в бекграунде отключена
     }
     
 }
