@@ -40,7 +40,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
-        // по умолчанию работа приложения в бекграунде отключена
+        let FeedVC = FeedViewController()
+        FeedVC.didTapPlayPause()
+/*      время до появления в консоли Background task ended является 26 секунд
+       остановка таймера на 30 секундах */
+       
+    }
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        UIApplication.shared.setMinimumBackgroundFetchInterval(
+          UIApplication.backgroundFetchIntervalMinimum)
     }
     
 }
