@@ -23,7 +23,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     let closeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "clear"), for: .normal)
+//        button.setImage(UIImage(systemName: "clear"), for: .normal)
+        button.setImage(UIImage(named: "close"), for: .normal)
+        
         button.alpha = 0
         button.tintColor = .white
         return button

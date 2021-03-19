@@ -30,7 +30,8 @@ final class LogInViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 10
-        view.backgroundColor = .systemGray6
+//        view.backgroundColor = .systemGray6
+        view.backgroundColor = UIColor(named: "sys")
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.lightGray.cgColor
         return view

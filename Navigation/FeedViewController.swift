@@ -12,9 +12,6 @@ final class FeedViewController: UIViewController {
     
     let post: Post = Post(title: "Пост")
     
-    
-    
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         print(type(of: self), #function)
@@ -28,6 +25,12 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reinstateBackgroundTask), name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+    
+    deinit {
+      NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,9 +79,51 @@ final class FeedViewController: UIViewController {
 //            return
 //        }
     }
-    
+   
+    var updateTimer: Timer?
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
   
+    func registerBackgroundTask() {
+      backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
+        self?.endBackgroundTask()
+      }
+      assert(backgroundTask != .invalid)
+    }
+      
+    func endBackgroundTask() {
+      print("Background task ended.")
+      UIApplication.shared.endBackgroundTask(backgroundTask)
+      backgroundTask = .invalid
+    }
     
-    
-  
+    func didTapPlayPause() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                                           selector: #selector(counter), userInfo: nil, repeats: true)
+        // register background task
+        registerBackgroundTask()
+     
+     
+    }
+   var number = 0
+    @objc func counter() {
+        number += 1
+        
+        switch UIApplication.shared.applicationState {
+        case .active:
+         print("App is foregrounded")
+        case .background:
+          print("App is backgrounded. Next number = \(number)")
+          print("Background time remaining = \(UIApplication.shared.backgroundTimeRemaining) seconds")
+          print("\(String(describing: updateTimer))")
+        case .inactive:
+          break
+        @unknown default:
+            fatalError()
+        }
+    }
+    @objc func reinstateBackgroundTask() {
+      if updateTimer != nil && backgroundTask == .invalid {
+        registerBackgroundTask()
+      }
+    }
 }

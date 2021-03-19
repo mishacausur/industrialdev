@@ -28,7 +28,7 @@ class PhotosTableViewCell: UITableViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
-        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        button.setImage(UIImage(named: "arrow"), for: .normal)
         return button
     }()
     
