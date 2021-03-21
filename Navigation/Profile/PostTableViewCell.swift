@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class PostTableViewCell: UITableViewCell {
 
@@ -23,7 +24,6 @@ class PostTableViewCell: UITableViewCell {
     
     private var autorPost: UILabel = {
         let string = UILabel()
-        string.translatesAutoresizingMaskIntoConstraints = false
         string.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         string.numberOfLines = 2
         string.textColor = .black
@@ -32,7 +32,6 @@ class PostTableViewCell: UITableViewCell {
     
     private var descriptionPost: UILabel = {
         let string = UILabel()
-        string.translatesAutoresizingMaskIntoConstraints = false
         string.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         string.numberOfLines = 0
         string.textColor = .systemGray
@@ -43,13 +42,11 @@ class PostTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.backgroundColor = .black
-        image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     private var likesPost: UILabel = {
         let number = UILabel()
-        number.translatesAutoresizingMaskIntoConstraints = false
         number.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         number.textColor = .black
         return number
@@ -57,7 +54,7 @@ class PostTableViewCell: UITableViewCell {
     
     private var viewsPost: UILabel = {
         let number = UILabel()
-        number.translatesAutoresizingMaskIntoConstraints = false
+      
         return number
     }()
 
@@ -73,34 +70,36 @@ class PostTableViewCell: UITableViewCell {
     private func setupCell(){
         contentView.addSubviews(autorPost, descriptionPost, imagePost, likesPost, viewsPost)
         
-        let constraints = [
-            imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imagePost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imagePost.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imagePost.heightAnchor.constraint(equalTo: imagePost.widthAnchor),
-            
-            autorPost.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            autorPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            autorPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            autorPost.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: -12),
-            
-           
-            
-            descriptionPost.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 16),
-            descriptionPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            likesPost.topAnchor.constraint(equalTo: descriptionPost.bottomAnchor, constant: 16),
-            likesPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            likesPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            
-            viewsPost.topAnchor.constraint(equalTo: likesPost.topAnchor),
-            viewsPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-            
-            
-        ]
+        imagePost.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
+            make.width.equalTo(contentView)
+            make.height.equalTo(imagePost.snp.width)
+    }
         
-        NSLayoutConstraint.activate(constraints)
+        autorPost.snp.makeConstraints{(make) -> Void in
+            make.top.equalTo(contentView).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView)
+            make.bottom.equalTo(imagePost.snp.top).offset(-12)
+        }
+        
+        descriptionPost.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(imagePost.snp.bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView)
+        }
+        
+        likesPost.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(descriptionPost.snp.bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.bottom.equalTo(contentView).offset(-16)
+        }
+        
+        viewsPost.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(likesPost)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
     }
     
     
