@@ -7,26 +7,28 @@
 //
 
 import UIKit
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
     
     let wrapperView: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+//        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let label: UILabel = {
         let label = UILabel()
         label.text = "Photos"
-        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
     let buttonArrow: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .black
         button.setImage(UIImage(named: "arrow"), for: .normal)
         return button
@@ -37,14 +39,14 @@ class PhotosTableViewCell: UITableViewCell {
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 8
-        stack.translatesAutoresizingMaskIntoConstraints = false
+//        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     let imageOne: UIImageView = {
         let image = UIImageView()
         image.image = #imageLiteral(resourceName: "1")
-        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
         return image
@@ -53,7 +55,7 @@ class PhotosTableViewCell: UITableViewCell {
     let imageTwo: UIImageView = {
         let image = UIImageView()
         image.image = #imageLiteral(resourceName: "14")
-        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
         return image
@@ -62,7 +64,7 @@ class PhotosTableViewCell: UITableViewCell {
     let imageThree: UIImageView = {
         let image = UIImageView()
         image.image = #imageLiteral(resourceName: "16")
-        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
         return image
@@ -71,7 +73,7 @@ class PhotosTableViewCell: UITableViewCell {
     let imageFour: UIImageView = {
         let image = UIImageView()
         image.image = #imageLiteral(resourceName: "4")
-        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
         return image
@@ -96,26 +98,56 @@ class PhotosTableViewCell: UITableViewCell {
         stack.addArrangedSubview(imageThree)
         stack.addArrangedSubview(imageFour)
         
-        let width: CGFloat = (frame.width - 12 * 2 - 8 * 3) / 4
+        let width: CGFloat = (frame.width - (12 * 2) - (8 * 3)) / 4
         
-        let constraints = [
-            wrapperView.heightAnchor.constraint(equalToConstant: 100),
-            
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            
-            buttonArrow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            buttonArrow.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-            
-            stack.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 12),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            
-            imageOne.widthAnchor.constraint(equalToConstant: width),
-            imageOne.heightAnchor.constraint(equalToConstant: width)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        contentView.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(150)
+        }
+        
+        wrapperView.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(150)
+        }
+        
+        label.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(contentView.snp.top).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(12)
+        }
+        
+        buttonArrow.snp.makeConstraints { (make) -> Void in
+            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
+            make.centerY.equalTo(label.snp.centerY)
+        }
+        
+        stack.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(label.snp.bottom).offset(12)
+            make.leading.equalTo(contentView.snp.leading).offset(12)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-12)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-12)
+        }
+        
+        imageOne.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(width)
+            make.width.equalTo(width)
+        }
+        
+//        let constraints = [
+//            wrapperView.heightAnchor.constraint(equalToConstant: 100),
+//            
+//            label.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+//            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+//            
+//            buttonArrow.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+//            buttonArrow.centerYAnchor.constraint(equalTo: label.centerYAnchor),
+//            
+//            stack.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 12),
+//            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+//            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+//            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+//            
+//            imageOne.widthAnchor.constraint(equalToConstant: width),
+//            imageOne.heightAnchor.constraint(equalToConstant: width)
+//        ]
+//        NSLayoutConstraint.activate(constraints)
     }
     
 }
