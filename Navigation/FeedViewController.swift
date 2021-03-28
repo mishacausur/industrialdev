@@ -8,16 +8,41 @@
 
 import UIKit
 
-protocol FeedViewOutput {
-    var navVC: UINavigationController? {get set}
-    func showPostVC(_: Post)
-}
-
 final class FeedViewController: UIViewController {
     
-    var output: FeedViewOutput?
+    var coordinator: FeedViewControllerFlowCoordinator?
+ 
+    let post: Post = Post(title: "Пост")
     
-    let containerView = ContainerView()
+    let containerView = UIStackView()
+    
+    let addPostButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Open post", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.backgroundColor = .blue
+        button.addTarget(self, action: #selector(navButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let postButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add new post", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.backgroundColor = .orange
+        button.addTarget(self, action: #selector(navButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc private func navButton(){
+        coordinator?.pushViewController(post)
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -32,10 +57,12 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
-        output = PostPresenter()
-        output?.navVC = navigationController
+        view.backgroundColor = .green
         setupContainer()
+        setupViews()
     }
+    
+  
     
     private func setupContainer(){
         view.addSubview(containerView)
@@ -47,7 +74,14 @@ final class FeedViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
         
-        containerView.onTap = output?.showPostVC
+       
+    }
+    
+    private func setupViews() {
+        containerView.addArrangedSubview(addPostButton)
+        containerView.addArrangedSubview(postButton)
+        containerView.axis = .vertical
+        containerView.spacing = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +121,7 @@ class ContainerView: UIStackView {
     
     var onTap: ((Post) -> Void)?
     
-    let post: Post = Post(title: "Пост")
+ 
     
     let addPostButton: UIButton = {
         let button = UIButton()
@@ -114,7 +148,7 @@ class ContainerView: UIStackView {
     }()
 
     @objc private func navButton(){
-      onTap?(post)
+      
     
     }
     
@@ -136,15 +170,3 @@ class ContainerView: UIStackView {
     
 }
 
-class PostPresenter: FeedViewOutput {
-
-    var navVC: UINavigationController?
-    
-    func showPostVC(_ post: Post) {
-        let postVC = PostViewController()
-        postVC.post = post
-        navVC?.pushViewController(postVC, animated: true)
-    }
-    
-    
-}

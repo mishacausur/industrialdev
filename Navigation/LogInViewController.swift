@@ -15,6 +15,8 @@ protocol LoginViewControllerDelegate {
 
 final class LogInViewController: UIViewController {
     
+    var coordinator: ProfileViewControllerFlowCoordinator?
+    
     var delegate: LoginViewControllerDelegate?
     
     private let scrollView: UIScrollView = {
@@ -100,9 +102,8 @@ final class LogInViewController: UIViewController {
     
     @objc private func liked() {
         if self.delegate!.checkLogin(login: loginText.text) && self.delegate!.checkPassword(password: passwordText.text) {
-            let profile = ProfileViewController()
-            navigationController?.pushViewController(profile, animated: true) }
-        else {
+            coordinator?.pushProfileViewController()
+        } else {
             print("Invalid Data")
         }
     }

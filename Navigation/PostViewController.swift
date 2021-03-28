@@ -10,6 +10,8 @@ import UIKit
 
 class PostViewController: UIViewController {
     
+    var coordinator: FeedViewControllerFlowCoordinator?
+    
     var post: Post?
 
     override func viewDidLoad() {
@@ -20,7 +22,6 @@ class PostViewController: UIViewController {
     }
     
     @objc private func presentInfoVC() {
-        let infoVC = InfoViewController()
-        present(infoVC, animated: true, completion: nil)
+        coordinator?.pushInfoVC()
     }
 }
