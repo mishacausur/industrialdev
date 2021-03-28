@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    func checkLogin(login: String?) -> Bool
+    func checkPassword(password: String?) -> Bool
+}
+
 final class LogInViewController: UIViewController {
     
-   
+    var coordinator: ProfileViewControllerFlowCoordinator?
+    
+    var delegate: LoginViewControllerDelegate?
     
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -94,10 +101,12 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        let profile = ProfileViewController()
-        navigationController?.pushViewController(profile, animated: true)
+        if self.delegate!.checkLogin(login: loginText.text) && self.delegate!.checkPassword(password: passwordText.text) {
+            coordinator?.pushProfileViewController()
+        } else {
+            print("Invalid Data")
+        }
     }
-    
     private func setupScrollView() {
        
         scrollView.clipsToBounds = true

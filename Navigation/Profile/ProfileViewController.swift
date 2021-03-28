@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    var coordinator: ProfileViewControllerFlowCoordinator?
+    
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
@@ -93,8 +95,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard indexPath.row == 0 else { return }
-            let vc = PhotosViewController()
-            navigationController?.pushViewController(vc, animated: true)
+        coordinator?.pushCollection()
     }
 }
 
