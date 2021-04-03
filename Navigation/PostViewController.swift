@@ -15,5 +15,12 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = post?.title
+        view.backgroundColor = .red
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(presentInfoVC))
+    }
+    
+    @objc private func presentInfoVC() {
+        let infoVC = InfoViewController()
+        present(infoVC, animated: true, completion: nil)
     }
 }
