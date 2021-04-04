@@ -111,6 +111,30 @@ final class LogInViewController: UIViewController {
         return indicator
     }()
     
+    func handle (error: LoginErrors) {
+        switch error {
+        case .invalidUserData:
+            alertInvalidData()
+        case .serverDowntime:
+            print("Server doesnt answer, please try later")
+        default:
+            break
+        }
+    }
+
+    func alertInvalidData() {
+        let alertController = UIAlertController(title: "Пользователь не найден", message: "Неверный логин или пароль", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+            print("Отмена")
+        }
+        let deleteAction = UIAlertAction(title: "Ок", style: .default) { _ in
+            print("Удалить")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
@@ -123,7 +147,7 @@ final class LogInViewController: UIViewController {
             let profile = ProfileViewController()
             navigationController?.pushViewController(profile, animated: true) }
         else {
-            print("Invalid Data")
+            handle(error: .invalidUserData)
         }
     }
     
@@ -146,6 +170,8 @@ final class LogInViewController: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
+    
+  
     
     private func setupScrollView() {
        
