@@ -121,7 +121,17 @@ final class LogInViewController: UIViewController {
             break
         }
     }
-
+    
+    let user = User()
+    
+//    func resultPassword(completion: (Result<User, LoginErrors>)) -> Void {
+//        if user.name == "John" {
+//            completion(completion(.success))
+//        } else {
+//            completion(.serverDowntime)
+//        }
+//    }
+    
     func alertInvalidData() {
         let alertController = UIAlertController(title: "Пользователь не найден", message: "Неверный логин или пароль", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
@@ -325,3 +335,9 @@ extension UIImage {
         return newImage!
     }
 }
+
+class User {
+    var name = "Misha"
+}
+
+

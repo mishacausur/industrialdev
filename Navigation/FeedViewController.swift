@@ -19,6 +19,10 @@ final class FeedViewController: UIViewController {
     
     let containerView = ContainerView()
     
+    var nilPost: String? = "Hello"
+    
+    
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         print(type(of: self), #function)
@@ -29,12 +33,36 @@ final class FeedViewController: UIViewController {
         print(type(of: self), #function)
     }
     
+    func checkStringToPost() throws {
+        do {
+            let checkString = try checkPostToNil()
+            print(checkString)
+        }
+        catch {
+
+        }
+    }
+    
+    func checkPostToNil() throws -> String {
+        if let post = nilPost {
+            return post
+        } else {
+            throw LoginErrors.temporaryUserBlock
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
         output = PostPresenter()
         output?.navVC = navigationController
         setupContainer()
+        do {
+            try checkStringToPost()
+        }
+        catch {
+            
+        }
     }
     
     private func setupContainer(){
