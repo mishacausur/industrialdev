@@ -21,8 +21,6 @@ final class FeedViewController: UIViewController {
     
     var nilPost: String? = "Hello"
     
-    
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         print(type(of: self), #function)

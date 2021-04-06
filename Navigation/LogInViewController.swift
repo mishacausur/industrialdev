@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 protocol LoginViewControllerDelegate {
     func checkLogin(login: String?) -> Bool
@@ -122,15 +123,16 @@ final class LogInViewController: UIViewController {
         }
     }
     
-    let user = User()
+    let user: User? = nil
     
-//    func resultPassword(completion: (Result<User, LoginErrors>)) -> Void {
-//        if user.name == "John" {
-//            completion(completion(.success))
-//        } else {
-//            completion(.serverDowntime)
-//        }
-//    }
+    func handleWithResult(completion: (Result<User, LoginErrors>) -> Void) {
+        if let checkUser = user {
+            completion(.success(checkUser))
+        } else {
+            completion(.failure(LoginErrors.serverDowntime))
+        }
+    }
+    
     
     func alertInvalidData() {
         let alertController = UIAlertController(title: "Пользователь не найден", message: "Неверный логин или пароль", preferredStyle: .alert)
@@ -180,8 +182,6 @@ final class LogInViewController: UIViewController {
             self.activityIndicator.stopAnimating()
         }
     }
-    
-  
     
     private func setupScrollView() {
        
@@ -266,18 +266,10 @@ final class LogInViewController: UIViewController {
     }
     
     private func setupLogInView() {
-        
-        
         middleView.backgroundColor = .lightGray
         middleView.translatesAutoresizingMaskIntoConstraints = false
-        
         loginView.translatesAutoresizingMaskIntoConstraints = false
-        
         passwordView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
-        
     }
     
     /// Keyboard observers
@@ -337,7 +329,9 @@ extension UIImage {
 }
 
 class User {
-    var name = "Misha"
+    var name: String?
+    
+    init(name: String) {
+        self.name = name
+    }
 }
-
-
