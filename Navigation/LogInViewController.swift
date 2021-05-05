@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 protocol LoginViewControllerDelegate {
     func checkLogin(login: String?) -> Bool
@@ -111,6 +112,41 @@ final class LogInViewController: UIViewController {
         return indicator
     }()
     
+    func handle (error: LoginErrors) {
+        switch error {
+        case .invalidUserData:
+            alertInvalidData()
+        case .serverDowntime:
+            print("Server doesnt answer, please try later")
+        default:
+            break
+        }
+    }
+    
+    let user: User? = nil
+    
+    func handleWithResult(completion: (Result<User, LoginErrors>) -> Void) {
+        if let checkUser = user {
+            completion(.success(checkUser))
+        } else {
+            completion(.failure(LoginErrors.serverDowntime))
+        }
+    }
+    
+    
+    func alertInvalidData() {
+        let alertController = UIAlertController(title: "Пользователь не найден", message: "Неверный логин или пароль", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+            print("Отмена")
+        }
+        let deleteAction = UIAlertAction(title: "Ок", style: .default) { _ in
+            print("Удалить")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
@@ -123,7 +159,7 @@ final class LogInViewController: UIViewController {
             let profile = ProfileViewController()
             navigationController?.pushViewController(profile, animated: true) }
         else {
-            print("Invalid Data")
+            handle(error: .invalidUserData)
         }
     }
     
@@ -230,18 +266,10 @@ final class LogInViewController: UIViewController {
     }
     
     private func setupLogInView() {
-        
-        
         middleView.backgroundColor = .lightGray
         middleView.translatesAutoresizingMaskIntoConstraints = false
-        
         loginView.translatesAutoresizingMaskIntoConstraints = false
-        
         passwordView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
-        
     }
     
     /// Keyboard observers
@@ -297,5 +325,13 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+}
+
+class User {
+    var name: String?
+    
+    init(name: String) {
+        self.name = name
     }
 }
