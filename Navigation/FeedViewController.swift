@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol FeedViewOutput {
+    var navVC: UINavigationController? {get set}
+    func showPostVC(_: Post)
+}
+
 final class FeedViewController: UIViewController {
     
-    let post: Post = Post(title: "Пост")
+    var output: FeedViewOutput?
     
+    let containerView = ContainerView()
     
-    
+    var nilPost: String? = "Hello"
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -25,9 +31,49 @@ final class FeedViewController: UIViewController {
         print(type(of: self), #function)
     }
     
+    func checkStringToPost() throws {
+        do {
+            let checkString = try checkPostToNil()
+            print(checkString)
+        }
+        catch {
+
+        }
+    }
+    
+    func checkPostToNil() throws -> String {
+        if let post = nilPost {
+            return post
+        } else {
+            throw LoginErrors.temporaryUserBlock
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(type(of: self), #function)
+        output = PostPresenter()
+        output?.navVC = navigationController
+        setupContainer()
+        do {
+            try checkStringToPost()
+        }
+        catch {
+            
+        }
+    }
+    
+    private func setupContainer(){
+        view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let constraints = [
+            containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
+        
+        NSLayoutConstraint.activate(constraints)
+        
+        containerView.onTap = output?.showPostVC
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,25 +106,71 @@ final class FeedViewController: UIViewController {
         print(type(of: self), #function)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "post" else {
-            return
-        }
-        guard let postViewController = segue.destination as? PostViewController else {
-            return
-        }
-        postViewController.post = post
-        
-//        guard  segue.identifier == "showLogInVC" else {
-//            return
-//        }
-//        guard let logInVC = segue.destination as? LogInViewController else {
-//            return
-//        }
+}
+
+
+class ContainerView: UIStackView {
+    
+    var onTap: ((Post) -> Void)?
+    
+    let post: Post = Post(title: "Пост")
+    
+    let addPostButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Open post", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.backgroundColor = .blue
+        button.addTarget(self, action: #selector(navButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let postButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add new post", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.backgroundColor = .orange
+        button.addTarget(self, action: #selector(navButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    @objc private func navButton(){
+      onTap?(post)
+    
     }
     
-  
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupViews() {
+        self.addArrangedSubview(addPostButton)
+        self.addArrangedSubview(postButton)
+        self.axis = .vertical
+        self.spacing = 10
+    }
+    
+}
+
+class PostPresenter: FeedViewOutput {
+
+    var navVC: UINavigationController?
+    
+    func showPostVC(_ post: Post) {
+        let postVC = PostViewController()
+        postVC.post = post
+        navVC?.pushViewController(postVC, animated: true)
+    }
     
     
-  
 }
