@@ -24,6 +24,7 @@
 		B69AAAD625B58EE600C35B98 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AAAD525B58EE600C35B98 /* Shadows.swift */; };
 		B6B7505725D1BA9B008190E7 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7505525D1BA9B008190E7 /* PhotosTableViewCell.swift */; };
 		B6B7505C25D2ED6F008190E7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7505B25D2ED6E008190E7 /* PhotosViewController.swift */; };
+		B6C8E6922642FFEC00E1C2EA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */; };
 		B6DC4C002618CCFF00A7879D /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */; };
 		B6DF981326078E12006EA35F /* LoginChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF981226078E12006EA35F /* LoginChecker.swift */; };
 		B6E4C19525C81023006ECA56 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E4C19425C81023006ECA56 /* LogInViewController.swift */; };
@@ -50,6 +51,7 @@
 		B69AAAD525B58EE600C35B98 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		B6B7505525D1BA9B008190E7 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		B6B7505B25D2ED6E008190E7 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B6DF981226078E12006EA35F /* LoginChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChecker.swift; sourceTree = "<group>"; };
 		B6E4C19425C81023006ECA56 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		060782A5250CE27700A87020 = {
 			isa = PBXGroup;
 			children = (
+				B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */,
 				060782B0250CE27700A87020 /* Navigation */,
 				060782AF250CE27700A87020 /* Products */,
 			);
@@ -222,6 +225,7 @@
 				B6DF981326078E12006EA35F /* LoginChecker.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				B64B0C0425B30FEE00CE69DD /* ProfileViewController.swift in Sources */,
+				B6C8E6922642FFEC00E1C2EA /* NetworkService.swift in Sources */,
 				B6E4C19525C81023006ECA56 /* LogInViewController.swift in Sources */,
 				B60A182D2619B6ED0009CE4A /* Errors.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
