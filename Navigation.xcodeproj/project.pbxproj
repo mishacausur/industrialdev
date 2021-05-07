@@ -51,7 +51,7 @@
 		B69AAAD525B58EE600C35B98 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		B6B7505525D1BA9B008190E7 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		B6B7505B25D2ED6E008190E7 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
-		B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = ../NetworkService.swift; sourceTree = "<group>"; };
 		B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B6DF981226078E12006EA35F /* LoginChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChecker.swift; sourceTree = "<group>"; };
 		B6E4C19425C81023006ECA56 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +72,6 @@
 		060782A5250CE27700A87020 = {
 			isa = PBXGroup;
 			children = (
-				B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */,
 				060782B0250CE27700A87020 /* Navigation */,
 				060782AF250CE27700A87020 /* Products */,
 			);
@@ -89,6 +88,7 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */,
 				B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */,
 				B6DF981226078E12006EA35F /* LoginChecker.swift */,
 				B6E4C19425C81023006ECA56 /* LogInViewController.swift */,
@@ -391,13 +391,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 79RZ866842;
+				DEVELOPMENT_TEAM = JKYU7W8LBP;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.artemnovichkov.Navigation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mishacausur.Navigation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

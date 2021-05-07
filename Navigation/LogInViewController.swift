@@ -147,6 +147,10 @@ final class LogInViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    let net = NetworkService()
+    let url = URL(string: "https://jsonplaceholder.typicode.com/posts")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()

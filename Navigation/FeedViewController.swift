@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 protocol FeedViewOutput {
     var navVC: UINavigationController? {get set}
     func showPostVC(_: Post)
