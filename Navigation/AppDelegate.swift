@@ -19,10 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard  let appConfigurator = appConfigurator else { fatalError() }
         NetworkService.appConfigutator = appConfigurator
         var url: URL?
-        url = URL(string: "https://swapi.dev/api/people/8")
-        NetworkService.dataTask(url: url!) { string in if let data = string { print(data)}}
-
-        
+        if let urlForTask = url {
+            NetworkService.dataTask(url: urlForTask) { string in if let data = string { print(data)
+                }
+            }
+        }
         return true
     }
     
