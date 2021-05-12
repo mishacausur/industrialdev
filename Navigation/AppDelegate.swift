@@ -7,13 +7,47 @@
 //
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var appConfigurator: AppConfiguration?
+    
+    var url: URL?
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        print("Jnon")
+        setUrlForConfigurator()
+        guard  let appConfigurator = appConfigurator else { fatalError() }
+        NetworkService.appConfigutator = appConfigurator
+        guard let url = NetworkService.appConfigutator?.appConfig(appConfigurator) else { fatalError() }
+        print(url)
+        
+        NetworkService.dataSessionTask(url: url) { string in
+            if let data = string { print (data)
+                }
+        }
         return true
+    }
+    
+    
+    private func setUrlForConfigurator() {
+        let randomNumber = Int.random(in: 0...2)
+        if randomNumber == 0 {
+            appConfigurator = .first(URL(string: "https://swapi.dev/api/people/8")!)
+            
+        }
+        if randomNumber == 1 {
+            appConfigurator = .second(URL(string: "https://swapi.dev/api/starships/3")!)
+            print("2")
+        }
+        if randomNumber == 2 {
+            appConfigurator = .third(URL(string: "https://swapi.dev/api/planets/5")!)
+            print("3")
+        }
+        
     }
 
     // MARK: UISceneSession Lifecycle
