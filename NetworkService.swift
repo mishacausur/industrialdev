@@ -14,17 +14,30 @@ struct NetworkService {
     
     static let dataSession = URLSession.shared
     
-    static func dataTask(url: URL, completion: @escaping (String?) -> Void) {
-        NetworkService.dataSession.dataTask(with: url) { ( data, response, error )  in
+    static func dataSessionTask(url: URL, completion: @escaping (String?) -> Void) {
+        let dataSessionTask = dataSession.dataTask(with: url) { ( data, response, error )  in
             guard let taskResponse = response as? HTTPURLResponse, taskResponse.statusCode == 200 else { return }
-            print(taskResponse.allHeaderFields, taskResponse.statusCode)
-            if data != nil { completion(String(data: data!, encoding: .utf8))}}.resume()
-        }
+            print("All Header Fields:", taskResponse.allHeaderFields, taskResponse.statusCode)
+            if let data = data { completion(String(data: data, encoding: .utf8))}
+            
+        }.resume()
     }
+}
 
 
 enum AppConfiguration {
     case first(URL)
     case second(URL)
     case third(URL)
+    
+    func appConfig(_ configuration: AppConfiguration) -> URL {
+        switch configuration {
+        case .first(let url):
+            return url
+        case .second(let url):
+            return url
+        case .third(let url):
+            return url
+        }
+    }
 }

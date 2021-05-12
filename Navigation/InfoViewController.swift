@@ -10,6 +10,18 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+//    var jsonParser: JsonModel {
+//        didSet {
+//            label.text = postTask.self
+//        }
+//    }
+    
+    let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let alertButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +43,8 @@ class InfoViewController: UIViewController {
         view.addSubview(alertButton)
         
         let constraints = [
+            label.bottomAnchor.constraint(equalTo: alertButton.topAnchor, constant: -20),
+            label.centerXAnchor.constraint(equalTo: alertButton.centerXAnchor),
             alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
         

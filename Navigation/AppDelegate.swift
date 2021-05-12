@@ -14,24 +14,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var appConfigurator: AppConfiguration?
     
+    var url: URL?
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        print("Jnon")
         setUrlForConfigurator()
         guard  let appConfigurator = appConfigurator else { fatalError() }
         NetworkService.appConfigutator = appConfigurator
-        var url: URL?
-        if let urlForTask = url {
-            NetworkService.dataTask(url: urlForTask) { string in if let data = string { print(data)
+        guard let url = NetworkService.appConfigutator?.appConfig(appConfigurator) else { fatalError() }
+        print(url)
+        
+        NetworkService.dataSessionTask(url: url) { string in
+            if let data = string { print (data)
                 }
-            }
         }
         return true
     }
+    
     
     private func setUrlForConfigurator() {
         let randomNumber = Int.random(in: 0...2)
         if randomNumber == 0 {
             appConfigurator = .first(URL(string: "https://swapi.dev/api/people/8")!)
-            print("1")
+            
         }
         if randomNumber == 1 {
             appConfigurator = .second(URL(string: "https://swapi.dev/api/starships/3")!)
@@ -41,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appConfigurator = .third(URL(string: "https://swapi.dev/api/planets/5")!)
             print("3")
         }
+        
     }
 
     // MARK: UISceneSession Lifecycle
