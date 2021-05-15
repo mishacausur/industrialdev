@@ -11,37 +11,20 @@ import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var appConfigurator: AppConfiguration?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        setUrlForConfigurator()
-        guard  let appConfigurator = appConfigurator else { fatalError() }
-        NetworkService.appConfigutator = appConfigurator
-        var url: URL?
-        if let urlForTask = url {
-            NetworkService.dataTask(url: urlForTask) { string in if let data = string { print(data)
-                }
-            }
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1") else { fatalError() }
+        let firstData = JsonModelForFirstTask.parsingFirstTask(url: url)  { string in
         }
+        
+        guard let urlTaskTwo = URL(string: "https://swapi.dev/api/planets/1") else { fatalError() }
+        let model = JsonModel.parsingJson(url: urlTaskTwo) { string in
+        }
+        print(model)
         return true
     }
     
-    private func setUrlForConfigurator() {
-        let randomNumber = Int.random(in: 0...2)
-        if randomNumber == 0 {
-            appConfigurator = .first(URL(string: "https://swapi.dev/api/people/8")!)
-            print("1")
-        }
-        if randomNumber == 1 {
-            appConfigurator = .second(URL(string: "https://swapi.dev/api/starships/3")!)
-            print("2")
-        }
-        if randomNumber == 2 {
-            appConfigurator = .third(URL(string: "https://swapi.dev/api/planets/5")!)
-            print("3")
-        }
-    }
+    
 
     // MARK: UISceneSession Lifecycle
 

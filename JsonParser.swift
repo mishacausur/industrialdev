@@ -10,36 +10,47 @@ import Foundation
 import UIKit
 
 let session = URLSession.shared
+let session2 = URLSession.shared
 
 /// Task 1
 
-struct JsonModelForFirstTask: Codable {
-    let userIdentifier: Int
-    let identificator: Int
-    let postTitle: String
-    let checking: Bool
+struct JsonModelForFirstTask {
+    let userIdentifier: Int?
+    let identificator: Int?
+    let postTitle: String?
+    let checking: Bool?
+    
+    static var textForLabel: String?
+    
+    static func parsingFirstTask(url: URL, completion: @escaping (String?) -> Void) -> JsonModelForFirstTask {
+        var model = JsonModelForFirstTask(userIdentifier: nil, identificator: nil, postTitle: nil, checking: nil)
+        let taskOne = session.dataTask(with: url) {
+            data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                print(error.debugDescription)
+                return
+            }
+            guard let data = data else {
+                print(error.debugDescription)
+                return
+            }
+            if let dictionary = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? Dictionary<String,Any> {
+                let firstTaskModel = JsonModelForFirstTask (
+                    userIdentifier: dictionary["userId"] as! Int,
+                    identificator: dictionary["id"] as! Int,
+                    postTitle: dictionary["title"] as! String,
+                    checking: dictionary["completed"] as! Bool)
+                 model = firstTaskModel
+                print(model)
+                textForLabel = model.postTitle
+            } 
+        }.resume()
+        
+        return model
+    }
+    
 }
-
-let taskOne = session.dataTask(with: URL(string: "https://jsonplaceholder.typicode.com/todos/1")!) {
-    data, response, error in
-    guard let httpResponse = response as? HTTPURLResponse,
-          httpResponse.statusCode == 200 else {
-        print(error.debugDescription)
-        return
-    }
-    guard let data = data else {
-        print(error.debugDescription)
-        return
-    }
-    if let rawValue = String(data: data, encoding: .utf8) {
-        print("flfnfl")
-        print(rawValue)
-    }
-
-
-
-
-
 
 
 
@@ -50,32 +61,61 @@ let taskOne = session.dataTask(with: URL(string: "https://jsonplaceholder.typico
 
 
 struct JsonModel: Codable {
-    let userIdentifier: Int
-    let identificator: Int
-    let postTitle: String
-    let checking: Bool
+    
+    let name: String?
+    let rotation: Int?
+    let orbital: Int?
+    let diameter: Int?
+    let climate: String?
+    let gravity: String?
+    let terrain: String?
+    let surfaceWater: Int?
+    let population: Int?
+    let residence: [String]?
+    let films: [String]?
+    let created: String?
+    let updated: String?
+    let url: String?
     
     enum CodingKeys: String, CodingKey {
-        case userIdentifier = "userId"
-        case identificator = "id"
-        case postTitle = "title"
-        case checking = "completed"
+        case name = "name"
+        case rotation = "rotation_period"
+        case orbital = "orbital_period"
+        case diameter = "diameter"
+        case climate = "climate"
+        case gravity = "gravity"
+        case terrain = "terrain"
+        case surfaceWater = "surface_water"
+        case population = "population"
+        case residence = "residents"
+        case films = "films"
+        case created = "created"
+        case updated = "edited"
+        case url = "url"
     }
-}
 
-
-
-let urlForJson = "https://jsonplaceholder.typicode.com/todos/1"
-
-let url = URL(string: urlForJson)!
-//
-//let postTask = session.dataTask(with: url) {data, response, error in
-//
-//    guard error == nil else { fatalError() }
-//    guard let postData = data else { fatalError() }
-//    if let post = try? JSONDecoder().decode(JsonModel.self, from: postData) {
-//        print(post.postTitle)
-//    }
-//}.resume()
-
+    static var orbital: Int?
+   
+    static func parsingJson(url: URL, completion: @escaping (Data?) -> Void) {
+        var num: Int?
+        let task = session2.dataTask(with: url) {data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                print(error.debugDescription)
+                return
+            }
+            guard error == nil else { fatalError() }
+            guard let postData = data else { fatalError() }
+            if let post = try? JSONDecoder().decode(JsonModel.self, from: postData) {
+                num = post.orbital
+            }
+            DispatchQueue.main.sync {
+                completion(postData)
+                orbital = num
+            }
+        }.resume()
+        
+       
+        
+    }
 }

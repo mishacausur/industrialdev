@@ -10,6 +10,23 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    var textForLabel: String?
+    var textOrbitalLabel: String?
+    
+    let textLabel: UILabel = {
+        let label = UILabel()
+        label.text = "herthe"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let orbitalLabel: UILabel = {
+        let label = UILabel()
+        label.text = "herthe"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let alertButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -28,9 +45,19 @@ class InfoViewController: UIViewController {
     }
     
     private func setupButton() {
+        view.addSubview(textLabel)
+        view.addSubview(orbitalLabel)
         view.addSubview(alertButton)
+        textLabel.text = JsonModelForFirstTask.textForLabel
+        orbitalLabel.text = (String(describing: JsonModel.orbital))
+        
+       
         
         let constraints = [
+            orbitalLabel.bottomAnchor.constraint(equalTo: textLabel.topAnchor, constant: -15),
+            orbitalLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            textLabel.bottomAnchor.constraint(equalTo: alertButton.topAnchor, constant: -15),
+            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
         
