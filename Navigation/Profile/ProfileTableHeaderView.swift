@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
+    
+    var delegate: ToMainLoginVC?
 
     let imageProfile: UIImageView = UIImageView(image: #imageLiteral(resourceName: "6485"))
     let labelProfile = UILabel()
@@ -21,6 +24,28 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return view
     }()
     
+    let logOutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Выйти", for: .normal)
+        button.backgroundColor = .blue
+        button.addTarget(self, action: #selector(logOut), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func logOut() {
+        do {
+            try FirebaseAuth.Auth.auth().signOut()
+            self.delegate?.toMainVC()
+            print("log out")
+            
+        }
+        catch {
+            print("An error occured")
+        }
+    }
+    
+    
+    
     let closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "clear"), for: .normal)
@@ -32,6 +57,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         imageProfile.isUserInteractionEnabled = true
+        addSubview(logOutButton)
         addSubview(labelProfile)
         labelSettings()
         addSubview(profileButton)
@@ -45,6 +71,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         addSubview(imageProfile)
         imageSetting()
         addSubview(closeButton)
+        
+       
        
     }
     
@@ -52,8 +80,24 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         super.init(coder: coder)!
     }
     
+    func setupLogOut() {
+        let constraints = [
+            logOutButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            logOutButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+       
+        
+        logOutButton.frame = CGRect(
+            x: frame.width-80,
+            y: 20,
+            width: 64,
+            height: 30)
+        
         imageProfile.frame = CGRect(
             x: 16,
             y: safeAreaInsets.top + 16,

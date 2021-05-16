@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ToMainLoginVC {
+    func toMainVC()
+}
+
 class ProfileViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
@@ -38,19 +42,7 @@ class ProfileViewController: UIViewController {
         setupTable()
         setupViews()
         view.backgroundColor = UIColor.lightGray
-        let timer = Timer(timeInterval: 1, repeats: true) { (_) in
-            self.countTimer -= 1
-            self.timerLable.text = "\(self.countTimer)"
-        }
-        
-        let timerToPop = Timer.scheduledTimer(timeInterval: 15,
-                                             target: self,
-                                             selector: #selector(popTimer),
-                                             userInfo: nil,
-                                             repeats: true)
-        
-        RunLoop.main.add(timer, forMode: .common)
-        RunLoop.main.add(timerToPop, forMode: .common)
+       
         
     }
     
@@ -110,6 +102,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard section == 0 else { return nil }
         let vc = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
+        vc.delegate = self
         return vc
     }
     
@@ -130,3 +123,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension ProfileViewController: ToMainLoginVC {
+    func toMainVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+}
