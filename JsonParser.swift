@@ -96,8 +96,8 @@ struct JsonModel: Codable {
 
     static var orbital: Int?
    
-    static func parsingJson(url: URL, completion: @escaping (Data?) -> Void) {
-        var num: Int?
+    static func parsingJson(url: URL, completion: @escaping (Data?) -> Void) -> JsonModel {
+        var parserModel: JsonModel?
         let task = session2.dataTask(with: url) {data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
@@ -106,16 +106,13 @@ struct JsonModel: Codable {
             }
             guard error == nil else { fatalError() }
             guard let postData = data else { fatalError() }
-            if let post = try? JSONDecoder().decode(JsonModel.self, from: postData) {
-                num = post.orbital
-            }
+            if let post = try? JSONDecoder().decode(JsonModel.self, from: postData){
+                parserModel = post
             DispatchQueue.main.sync {
-                completion(postData)
-                orbital = num
+                completion(postData) }
             }
         }.resume()
-        
-       
-        
+        return parserModel!
     }
+    
 }

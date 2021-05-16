@@ -16,11 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1") else { fatalError() }
         let firstData = JsonModelForFirstTask.parsingFirstTask(url: url)  { string in
         }
-        
-        guard let urlTaskTwo = URL(string: "https://swapi.dev/api/planets/1") else { fatalError() }
-        let model = JsonModel.parsingJson(url: urlTaskTwo) { string in
-        }
-        print(model)
         return true
     }
     
