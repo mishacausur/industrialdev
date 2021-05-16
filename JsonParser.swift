@@ -63,14 +63,14 @@ struct JsonModelForFirstTask {
 struct JsonModel: Codable {
     
     let name: String?
-    let rotation: Int?
-    let orbital: Int?
-    let diameter: Int?
+    let rotation: String?
+    let orbital: String?
+    let diameter: String?
     let climate: String?
     let gravity: String?
     let terrain: String?
-    let surfaceWater: Int?
-    let population: Int?
+    let surfaceWater: String?
+    let population: String?
     let residence: [String]?
     let films: [String]?
     let created: String?
@@ -94,10 +94,10 @@ struct JsonModel: Codable {
         case url = "url"
     }
 
-    static var orbital: Int?
+    static var orbital: String?
    
     static func parsingJson(url: URL, completion: @escaping (Data?) -> Void) -> JsonModel {
-        var parserModel: JsonModel?
+        var parserModel =  JsonModel(name: "", rotation: "", orbital: "", diameter: "", climate: "", gravity: "", terrain: "", surfaceWater: "", population: "", residence: [""], films: [""], created: "", updated: "", url: "")
         let task = session2.dataTask(with: url) {data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
@@ -108,11 +108,12 @@ struct JsonModel: Codable {
             guard let postData = data else { fatalError() }
             if let post = try? JSONDecoder().decode(JsonModel.self, from: postData){
                 parserModel = post
+                orbital = parserModel.orbital
             DispatchQueue.main.sync {
                 completion(postData) }
             }
         }.resume()
-        return parserModel!
+        return parserModel
     }
     
 }

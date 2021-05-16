@@ -49,7 +49,7 @@ class InfoViewController: UIViewController {
         view.addSubview(orbitalLabel)
         view.addSubview(alertButton)
         textLabel.text = JsonModelForFirstTask.textForLabel
-        orbitalLabel.text = (String(describing: JsonModel.orbital))
+        orbitalLabel.text = JsonModel.orbital
         
        
         
