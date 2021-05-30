@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     var cellHeight: CGFloat {return (view.frame.width - 24 - (8*3)) / (view.frame.width * 4)}
-    let cellSpacingHeight: CGFloat = 5
+//    var cellSpacingHeight: CGFloat {return CGFloat = 5 }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }

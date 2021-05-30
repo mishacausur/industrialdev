@@ -113,26 +113,8 @@ final class LogInViewController: UIViewController {
         return indicator
     }()
     
-    func handle (error: LoginErrors) {
-        switch error {
-        case .invalidUserData:
-            alertInvalidData()
-        case .serverDowntime:
-            print("Server doesnt answer, please try later")
-        default:
-            break
-        }
-    }
     
     let user: User? = nil
-    
-    func handleWithResult(completion: (Result<User, LoginErrors>) -> Void) {
-        if let checkUser = user {
-            completion(.success(checkUser))
-        } else {
-            completion(.failure(LoginErrors.serverDowntime))
-        }
-    }
     
     
     func alertInvalidData() {
