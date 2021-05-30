@@ -48,8 +48,8 @@ class InfoViewController: UIViewController {
         view.addSubview(textLabel)
         view.addSubview(orbitalLabel)
         view.addSubview(alertButton)
-        textLabel.text = JsonModelForFirstTask.textForLabel
-        orbitalLabel.text = JsonModel.orbital
+        textLabel.text = ApiRequest.textForLabel
+        orbitalLabel.text = ApiRequest.orbital
         
        
         

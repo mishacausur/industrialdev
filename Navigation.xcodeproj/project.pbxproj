@@ -17,6 +17,7 @@
 		060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C7250CEE5D00A87020 /* PostViewController.swift */; };
 		060782CA250CEE7200A87020 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C9250CEE7200A87020 /* Post.swift */; };
 		B60A182D2619B6ED0009CE4A /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60A182C2619B6ED0009CE4A /* Errors.swift */; };
+		B61B61DB2663AEBE00E186C4 /* ApisRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B61DA2663AEBE00E186C4 /* ApisRequest.swift */; };
 		B64B0C0425B30FEE00CE69DD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B0C0325B30FEE00CE69DD /* ProfileViewController.swift */; };
 		B662AF6925C9B9CC00A508AC /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B662AF6825C9B9CC00A508AC /* PostTableViewCell.swift */; };
 		B662AF6C25C9F32500A508AC /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B662AF6B25C9F32500A508AC /* ProfileTableHeaderView.swift */; };
@@ -25,7 +26,6 @@
 		B69AAAD625B58EE600C35B98 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69AAAD525B58EE600C35B98 /* Shadows.swift */; };
 		B6B7505725D1BA9B008190E7 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7505525D1BA9B008190E7 /* PhotosTableViewCell.swift */; };
 		B6B7505C25D2ED6F008190E7 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B7505B25D2ED6E008190E7 /* PhotosViewController.swift */; };
-		B6C8E6922642FFEC00E1C2EA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */; };
 		B6DC4C002618CCFF00A7879D /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */; };
 		B6DF981326078E12006EA35F /* LoginChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DF981226078E12006EA35F /* LoginChecker.swift */; };
 		B6E4C19525C81023006ECA56 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E4C19425C81023006ECA56 /* LogInViewController.swift */; };
@@ -45,6 +45,7 @@
 		060782C7250CEE5D00A87020 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		060782C9250CEE7200A87020 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B60A182C2619B6ED0009CE4A /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		B61B61DA2663AEBE00E186C4 /* ApisRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApisRequest.swift; sourceTree = "<group>"; };
 		B64B0C0325B30FEE00CE69DD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B662AF6825C9B9CC00A508AC /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B662AF6B25C9F32500A508AC /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		B69AAAD525B58EE600C35B98 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
 		B6B7505525D1BA9B008190E7 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		B6B7505B25D2ED6E008190E7 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
-		B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = ../NetworkService.swift; sourceTree = "<group>"; };
 		B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		B6DF981226078E12006EA35F /* LoginChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChecker.swift; sourceTree = "<group>"; };
 		B6E4C19425C81023006ECA56 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				B6C8E6912642FFEC00E1C2EA /* NetworkService.swift */,
 				B66C66EF264C64BE00C61BCD /* JsonParser.swift */,
+				B61B61DA2663AEBE00E186C4 /* ApisRequest.swift */,
 				B6DC4BFF2618CCFF00A7879D /* BruteForce.swift */,
 				B6DF981226078E12006EA35F /* LoginChecker.swift */,
 				B6E4C19425C81023006ECA56 /* LogInViewController.swift */,
@@ -223,13 +223,13 @@
 				B662AF6925C9B9CC00A508AC /* PostTableViewCell.swift in Sources */,
 				B6DC4C002618CCFF00A7879D /* BruteForce.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
+				B61B61DB2663AEBE00E186C4 /* ApisRequest.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
 				B6E4C19C25C9B04F006ECA56 /* Storage.swift in Sources */,
 				B6DF981326078E12006EA35F /* LoginChecker.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,
 				B64B0C0425B30FEE00CE69DD /* ProfileViewController.swift in Sources */,
-				B6C8E6922642FFEC00E1C2EA /* NetworkService.swift in Sources */,
 				B6E4C19525C81023006ECA56 /* LogInViewController.swift in Sources */,
 				B60A182D2619B6ED0009CE4A /* Errors.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,

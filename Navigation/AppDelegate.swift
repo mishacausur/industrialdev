@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos/1") else { fatalError() }
-        let firstData = JsonModelForFirstTask.parsingFirstTask(url: url)  { string in
+        let firstData = ApiRequest.parsingFirstTask(url: url)  { string in
         }
         return true
     }

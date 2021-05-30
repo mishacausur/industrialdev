@@ -56,7 +56,7 @@ final class FeedViewController: UIViewController {
         output?.navVC = navigationController
         setupContainer()
         guard let urlTaskTwo = URL(string: "https://swapi.dev/api/planets/1") else { fatalError() }
-        let model = JsonModel.parsingJson(url: urlTaskTwo) { string in
+        let model = ApiRequest.parsingJson(url: urlTaskTwo) { string in
         }
         print(model)
         do {
