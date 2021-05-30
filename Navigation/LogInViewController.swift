@@ -11,13 +11,13 @@ import Foundation
 import FirebaseAuth
 
 protocol LoginViewControllerDelegate {
-    func checkLogin(login: String?) -> Bool
-    func checkPassword(password: String?) -> Bool
+    func currentUser()
+    func createUser(email: String, password: String) -> Bool
 }
 
 final class LogInViewController: UIViewController {
     
-    var delegate: LoginViewControllerDelegate?
+    var delegate: LoginChecker?
     
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -156,7 +156,7 @@ final class LogInViewController: UIViewController {
         likeButton.isEnabled = false
         [loginText, passwordText].forEach({ $0.addTarget(self, action: #selector(editingChanged), for: .editingChanged) })
         
-        if FirebaseAuth.Auth.auth().currentUser != nil {
+        if delegate?.currentUser() != nil {
             let profile = ProfileViewController()
             navigationController?.pushViewController(profile, animated: true)
         }
@@ -177,20 +177,17 @@ final class LogInViewController: UIViewController {
             print("Missing field data")
             return
         }
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {[weak self] result, error in
-                                            guard let strongSelf = self else {
-                                                return
-                                            }
-                                            guard error == nil else {
-                                                strongSelf.showCreateAccount(email: email, password: password)
-                                                return
-                                            }
-                                            print("U have sign in")
-                                            let profile = ProfileViewController()
-            self?.navigationController?.pushViewController(profile, animated: true)
-        })
-}
-
+        if let del = self.delegate {
+            if del.createUser(email: email, password: password) == true {
+                print("OKKK")
+                let profile = ProfileViewController()
+                self.navigationController?.pushViewController(profile, animated: true) }
+            else {
+                print("NOT FOUND")
+                showCreateAccount(email: email, password: password)
+            }
+        }
+    }
 func showCreateAccount(email: String, password: String) {
     let alert = UIAlertController(title: "Профиль с такими данными не найден", message: "Создать новый профиль?", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Создать", style: .default, handler: {_ in
@@ -219,14 +216,14 @@ self?.navigationController?.pushViewController(profile, animated: true)
 var password = ""
 
 @objc private func forceButton() {
-    let serialQueueSlow = DispatchQueue(label: "someQueue", qos: .background)
-    let bf = BruteForce()
-    passwordText.isSecureTextEntry = false
-    activityIndicator.startAnimating()
-    serialQueueSlow.async {
-        self.password = bf.bruteForce()
-        self.inputPassword()
-    }
+//    let serialQueueSlow = DispatchQueue(label: "someQueue", qos: .background)
+//    let bf = BruteForce()
+//    passwordText.isSecureTextEntry = false
+//    activityIndicator.startAnimating()
+//    serialQueueSlow.async {
+//        self.password = bf.bruteForce()
+//        self.inputPassword()
+//    }
 }
 
 func inputPassword() {

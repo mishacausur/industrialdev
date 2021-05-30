@@ -7,38 +7,26 @@
 //
 import Foundation
 import UIKit
-
-struct Checker {
-    private var login = "Misha"
-    private var password = "123"
-    
-    static var shared = Checker()
-    
-    private init() {}
-    
-    func check(loginToCheck: String?, passwordToCheck: String?) -> Bool {
-        if loginToCheck != nil && passwordToCheck == nil {
-            if loginToCheck == login {
-                return true
-            } else { return false }
-        }
-        if passwordToCheck != nil && loginToCheck == nil {
-            if passwordToCheck == password {
-                return true
-            } else { return false }
-        }
-        return false
-    }
-}
-
+import FirebaseAuth
 
 struct LoginChecker: LoginViewControllerDelegate {
     
-    func checkLogin(login: String?) -> Bool {
-        return Checker.shared.check(loginToCheck: login, passwordToCheck: nil)
+    func createUser(email: String, password: String) -> Bool {
+        var check: Bool = false
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {result, error in
+            guard error == nil else {
+                check = false
+                return
+            }
+            check = true
+        })
+        return check
     }
     
-    func checkPassword(password: String?) -> Bool {
-        return Checker.shared.check(loginToCheck: nil, passwordToCheck: password)
+    
+    func currentUser() {
+        FirebaseAuth.Auth.auth().currentUser
     }
+    
+    
 }
