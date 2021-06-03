@@ -31,23 +31,7 @@ final class FeedViewController: UIViewController {
         print(type(of: self), #function)
     }
     
-    func checkStringToPost() throws {
-        do {
-            let checkString = try checkPostToNil()
-            print(checkString)
-        }
-        catch {
-
-        }
-    }
     
-    func checkPostToNil() throws -> String {
-        if let post = nilPost {
-            return post
-        } else {
-            throw LoginErrors.temporaryUserBlock
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,12 +39,6 @@ final class FeedViewController: UIViewController {
         output = PostPresenter()
         output?.navVC = navigationController
         setupContainer()
-        do {
-            try checkStringToPost()
-        }
-        catch {
-            
-        }
     }
     
     private func setupContainer(){
