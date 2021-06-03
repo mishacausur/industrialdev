@@ -12,7 +12,6 @@ import Foundation
 
 final class LogInViewController: UIViewController {
     
-
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -106,9 +105,7 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        if self.delegate!.checkLogin(login: loginText.text) && self.delegate!.checkPassword(password: passwordText.text) {
-            let profile = ProfileViewController()
-            navigationController?.pushViewController(profile, animated: true) }
+       
     }
     
 
