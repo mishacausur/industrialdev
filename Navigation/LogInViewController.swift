@@ -8,9 +8,12 @@
 
 import UIKit
 import Foundation
+import RealmSwift
 
 
 final class LogInViewController: UIViewController {
+    
+    let realm = try! Realm()
     
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -99,12 +102,34 @@ final class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkUser()
         setupScrollView()
         setupLogInView()
         view.backgroundColor = .white
     }
     
+    private func checkUser() {
+        guard let user = try? realm.objects(UserRealm.self) else { return }
+            let vc = ProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     @objc private func liked() {
+        guard let login = loginText.text, !login.isEmpty,
+              let password = passwordText.text, !password.isEmpty else {
+            return
+        }
+        let user = UserRealm()
+        user.login = login
+        user.password = password
+        realm.beginWrite()
+        realm.add(user)
+        try! realm.commitWrite()
+        print(realm.objects(UserRealm.self))
+        
+        let vc = ProfileViewController()
+        navigationController?.pushViewController(vc, animated: true)
        
     }
     
