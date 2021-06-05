@@ -90,48 +90,6 @@ final class LogInViewController: UIViewController {
         
     }()
     
-    private lazy var bruteForceButton: UIButton = {
-        
-        let button = UIButton()
-        button.setTitle("Подобрать пароль", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .red
-        button.layer.cornerRadius = 10
-        button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(forceButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-        
-    }()
-    
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.color = .red
-        
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
-    }()
-    
-    func handle (error: LoginErrors) {
-        switch error {
-        case .invalidUserData:
-            alertInvalidData()
-        case .serverDowntime:
-            print("Server doesnt answer, please try later")
-        default:
-            break
-        }
-    }
-    
-    let user: User? = nil
-    
-    func handleWithResult(completion: (Result<User, LoginErrors>) -> Void) {
-        if let checkUser = user {
-            completion(.success(checkUser))
-        } else {
-            completion(.failure(LoginErrors.serverDowntime))
-        }
-    }
     
     
     func alertInvalidData() {
@@ -159,30 +117,10 @@ final class LogInViewController: UIViewController {
             let profile = ProfileViewController()
             navigationController?.pushViewController(profile, animated: true) }
         else {
-            handle(error: .invalidUserData)
+            
         }
     }
-    
-    var password = ""
-    
-    @objc private func forceButton() {
-        let serialQueueSlow = DispatchQueue(label: "someQueue", qos: .background)
-        let bf = BruteForce()
-        passwordText.isSecureTextEntry = false
-        activityIndicator.startAnimating()
-        serialQueueSlow.async {
-            self.password = bf.bruteForce()
-            self.inputPassword()
-        }
-    }
-    
-    func inputPassword() {
-        DispatchQueue.main.async {
-            self.passwordText.text = self.password
-            self.activityIndicator.stopAnimating()
-        }
-    }
-    
+
     private func setupScrollView() {
        
         scrollView.clipsToBounds = true
@@ -192,11 +130,10 @@ final class LogInViewController: UIViewController {
         scrollView.contentInsetAdjustmentBehavior = .automatic
         view.addSubview(scrollView)
         scrollView.addSubview(wrapperView)
-        wrapperView.addSubviews(imageLogo, commonView, likeButton, bruteForceButton)
+        wrapperView.addSubviews(imageLogo, commonView, likeButton)
         commonView.addSubviews(loginView, middleView, passwordView)
         loginView.addSubview(loginText)
         passwordView.addSubview(passwordText)
-        scrollView.addSubview(activityIndicator)
     
         let constraints = [
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -251,15 +188,7 @@ final class LogInViewController: UIViewController {
             likeButton.topAnchor.constraint(equalTo: commonView.bottomAnchor, constant: 40),
             likeButton.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -20),
             likeButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 20),
-            likeButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            bruteForceButton.topAnchor.constraint(equalTo: likeButton.bottomAnchor, constant: 16),
-            bruteForceButton.trailingAnchor.constraint(equalTo: likeButton.trailingAnchor),
-            bruteForceButton.leadingAnchor.constraint(equalTo: likeButton.leadingAnchor),
-            bruteForceButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            activityIndicator.topAnchor.constraint(equalTo: bruteForceButton.bottomAnchor, constant: 16),
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            likeButton.heightAnchor.constraint(equalToConstant: 50)
             ]
         
         NSLayoutConstraint.activate(constraints)
@@ -328,10 +257,3 @@ extension UIImage {
     }
 }
 
-class User {
-    var name: String?
-    
-    init(name: String) {
-        self.name = name
-    }
-}
