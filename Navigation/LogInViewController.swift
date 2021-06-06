@@ -113,12 +113,10 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        if self.delegate!.checkLogin(login: loginText.text) && self.delegate!.checkPassword(password: passwordText.text) {
-            let profile = ProfileViewController()
-            navigationController?.pushViewController(profile, animated: true) }
-        else {
-            
-        }
+        let dataModel = DataStorageModel()
+        let dataStorage = DataStorage(dataStorage: dataModel)
+        let profile = ProfileViewController(dataStorageModel: dataStorage)
+        navigationController?.pushViewController(profile, animated: true)
     }
 
     private func setupScrollView() {

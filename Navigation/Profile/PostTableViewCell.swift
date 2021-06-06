@@ -10,14 +10,27 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    let dataModel = DataStorageModel()
+    
+    var completion: (() -> Void)?
    
     var post: PostModel? {
         didSet {
             autorPost.text = post?.autor
             descriptionPost.text = post?.description
-            imagePost.image = UIImage.init(imageLiteralResourceName: String((post?.imageName)!))
+            imagePost.image = UIImage.init(imageLiteralResourceName: (post?.imageName)!)
             likesPost.text = String(post!.likes)
             viewsPost.text = String(post!.views)
+        }
+    }
+    
+    var postFav: DataPostModel? {
+        didSet {
+            autorPost.text = postFav?.autor
+            descriptionPost.text = postFav?.description
+            imagePost.image = UIImage.init(imageLiteralResourceName: (postFav?.imageName) ?? "Frame 3")
+            likesPost.text = postFav?.likes
+            viewsPost.text = postFav?.views
         }
     }
     
@@ -43,6 +56,7 @@ class PostTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.backgroundColor = .black
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -66,12 +80,24 @@ class PostTableViewCell: UITableViewCell {
         setupCell()
     }
     
+   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func favorite() {
+        guard completion != nil else {
+            return
+        }
+        completion!()
+        print("okkkkkk")
+    }
+    
     private func setupCell(){
         contentView.addSubviews(autorPost, descriptionPost, imagePost, likesPost, viewsPost)
+        let favoriteRecognizer = UITapGestureRecognizer(target: self, action: #selector(favorite))
+        favoriteRecognizer.numberOfTapsRequired = 2
+        imagePost.addGestureRecognizer(favoriteRecognizer)
         
         let constraints = [
             imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController {
     
@@ -14,16 +15,30 @@ class ProfileViewController: UIViewController {
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
     
+    var dataStorage: DataStorage?
+    
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
     }
+    
+    init(dataStorageModel: DataStorage) {
+        dataStorage = dataStorageModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
         setupViews()
         view.backgroundColor = UIColor.lightGray
+        
     }
+    
     
     private func setupTable(){
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +46,6 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosTableViewCell")
-       
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
     }
     private func setupViews() {
@@ -52,13 +66,19 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     var cellHeight: CGFloat {return (view.frame.width - 24 - (8*3)) / (view.frame.width * 4)}
     
+    @objc func favorite() {
+//        completion(Post)
+//        print("okkkkkk")
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 1 } else {
+            return 1
+        } else {
             let tableSection = Storage.posts.count
             return tableSection
             }
@@ -68,6 +88,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
         let post = Storage.posts[indexPath.row]
         cell.post = post
+        cell.completion = { [self] in
+            dataStorage!.saveToFav(post: post)
+        }
+           
+       
         let photoCell = tableView.dequeueReusableCell(withIdentifier: "PhotosTableViewCell", for: indexPath) as! PhotosTableViewCell
         if (indexPath.section == 0) {
             return photoCell } else {
@@ -92,7 +117,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.row == 0 else { return }
+        guard indexPath.section == 0 else { return }
             let vc = PhotosViewController()
             navigationController?.pushViewController(vc, animated: true)
     }
