@@ -110,9 +110,11 @@ final class LogInViewController: UIViewController {
     
     private func checkUser() {
         guard let user = try? realm.objects(UserRealm.self) else { return }
+        let user1 = user.first
+        if user1?.login != nil && user1?.password != nil {
             let vc = ProfileViewController()
             navigationController?.pushViewController(vc, animated: true)
-        
+        }
     }
     
     @objc private func liked() {
