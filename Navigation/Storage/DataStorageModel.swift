@@ -46,6 +46,7 @@ class DataStorageModel {
     }
     
     func dataPostToPost(post: DataPostModel) -> PostModel {
+        
         let autor = post.autor
         let description = post.postDescription
         let image = post.imageName
@@ -53,8 +54,8 @@ class DataStorageModel {
         let likes = post.likes
         
         let postModel = PostModel(autor: autor!, description: description!, imageName: image!, likes: Int(likes!)!, views: Int(views!)!)
-        
-        return postModel
+
+            return postModel
     }
     
     func getFav() -> [DataPostModel] {

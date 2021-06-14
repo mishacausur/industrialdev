@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
     
-    var dataStorage: DataStorage?
+    let dataStorage: DataStorage?
     
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
@@ -66,11 +66,6 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     var cellHeight: CGFloat {return (view.frame.width - 24 - (8*3)) / (view.frame.width * 4)}
     
-    @objc func favorite() {
-//        completion(Post)
-//        print("okkkkkk")
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -88,8 +83,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
         let post = Storage.posts[indexPath.row]
         cell.post = post
-        cell.completion = { [self] in
-            dataStorage!.saveToFav(post: post)
+        cell.completion = { [weak self] in
+            self!.dataStorage!.saveToFav(post: post)
         }
            
        

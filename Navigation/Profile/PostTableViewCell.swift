@@ -75,10 +75,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func favorite() {
-        guard completion != nil else {
-            return
-        }
-        completion!()
+        completion?()
         print("okkkkkk")
     }
     

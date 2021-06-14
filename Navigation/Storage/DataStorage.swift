@@ -11,7 +11,7 @@ import UIKit
 
 class DataStorage {
     
-    var dataStorage: DataStorageModel
+    let dataStorage: DataStorageModel
     
     init(dataStorage: DataStorageModel) {
         self.dataStorage = dataStorage
