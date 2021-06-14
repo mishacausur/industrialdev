@@ -24,16 +24,6 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
-    var postFav: DataPostModel? {
-        didSet {
-            autorPost.text = postFav?.autor
-            descriptionPost.text = postFav?.description
-            imagePost.image = UIImage.init(imageLiteralResourceName: (postFav?.imageName) ?? "Frame 3")
-            likesPost.text = postFav?.likes
-            viewsPost.text = postFav?.views
-        }
-    }
-    
     private var autorPost: UILabel = {
         let string = UILabel()
         string.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +70,6 @@ class PostTableViewCell: UITableViewCell {
         setupCell()
     }
     
-   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -110,8 +99,6 @@ class PostTableViewCell: UITableViewCell {
             autorPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             autorPost.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: -12),
             
-           
-            
             descriptionPost.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 16),
             descriptionPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -122,14 +109,8 @@ class PostTableViewCell: UITableViewCell {
             
             viewsPost.topAnchor.constraint(equalTo: likesPost.topAnchor),
             viewsPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-            
-            
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
-    
-    
-    
-    
 }

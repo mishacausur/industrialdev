@@ -18,7 +18,6 @@ class FavViewController: UIViewController {
         super.viewDidLoad()
         setupTable()
         setupViews()
-        // Do any additional setup after loading the view.
     }
     
     private func setupTable(){
@@ -29,14 +28,13 @@ class FavViewController: UIViewController {
     }
     private func setupViews() {
         view.addSubview(tableView)
-       
+        
         let constraints = [
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
 }
@@ -78,12 +76,5 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .zero
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        guard indexPath.section == 0 else { return }
-//            let vc = PhotosViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-//    }
 }
 
