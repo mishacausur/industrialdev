@@ -13,7 +13,7 @@ class PostTableViewCell: UITableViewCell {
     let dataModel = DataStorageModel()
     
     var completion: (() -> Void)?
-   
+
     var post: PostModel? {
         didSet {
             autorPost.text = post?.autor

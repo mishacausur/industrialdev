@@ -265,14 +265,25 @@
         <!--Favorite posts-->
         <scene sceneID="vRM-NM-Qgf">
             <objects>
-                <viewController id="zaC-PD-79A" customClass="FavViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="favorite" id="zaC-PD-79A" customClass="FavViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cJh-W4-A7V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="UGd-jL-x8Z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorite posts" id="fZY-Xd-Xi8"/>
+                    <navigationItem key="navigationItem" title="Favorite posts" id="fZY-Xd-Xi8">
+                        <barButtonItem key="leftBarButtonItem" title="Фильтр" id="SSf-W7-aQd">
+                            <connections>
+                                <action selector="filterAction:" destination="zaC-PD-79A" id="l5z-Gb-M5t"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Убрать фильтр" id="g7Y-ly-F02">
+                            <connections>
+                                <action selector="clearFilterAction:" destination="zaC-PD-79A" id="pis-d3-RBI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkg-T3-8IV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

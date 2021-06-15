@@ -85,6 +85,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.post = post
         cell.completion = { [weak self] in
             self!.dataStorage!.saveToFav(post: post)
+           
         }
            
        
