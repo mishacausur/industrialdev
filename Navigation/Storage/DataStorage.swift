@@ -21,12 +21,16 @@ class DataStorage {
         dataStorage.favoritePost(post: post)
     }
     
-    func getFavorites() -> [DataPostModel] {
-        dataStorage.getFav()
+    func getFavorites(autor: String?) -> [DataPostModel] {
+        dataStorage.getFav(autor: autor)
     }
     
     func toPost(post: DataPostModel) -> PostModel {
         dataStorage.dataPostToPost(post: post)
+    }
+    
+    func deletePost(post: DataPostModel) {
+        dataStorage.remove(post: post)
     }
     
 }

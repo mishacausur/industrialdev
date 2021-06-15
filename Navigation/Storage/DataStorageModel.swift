@@ -27,18 +27,32 @@ class DataStorageModel {
         return persistentContainer.viewContext
     }()
     
+    lazy var backgroundContext: NSManagedObjectContext = {
+        return persistentContainer.newBackgroundContext()
+    }()
+    
     func favoritePost(post: PostModel) {
         
-        let favoritePost = DataPostModel(context: viewContext)
+        let favoritePost = DataPostModel(context: backgroundContext)
         favoritePost.autor = post.autor
         favoritePost.postDescription = post.description
         favoritePost.imageName = post.imageName
         favoritePost.views = String(post.views)
         favoritePost.likes = String(post.likes)
-        
+        backgroundContext.perform { [weak self] in
+            do {
+                try self?.backgroundContext.save()
+            }
+            catch let error {
+                print(error)
+            }
+        }
+    }
+    
+    func remove(post: DataPostModel) {
+        viewContext.delete(post)
         do {
             try viewContext.save()
-            
         }
         catch let error {
             print(error)
@@ -58,19 +72,30 @@ class DataStorageModel {
             return postModel
     }
     
-    func getFav() -> [DataPostModel] {
+    func getFav(autor: String?) -> [DataPostModel] {
         let fetch: NSFetchRequest<DataPostModel> = DataPostModel.fetchRequest()
-        do {
-            return try viewContext.fetch(fetch)
-        } catch {
-            fatalError()
+        fetch.fetchBatchSize = 5
+        if let text = autor  {
+            let predicate = NSPredicate(format: "%K == %@", #keyPath(DataPostModel.autor), text)
+            fetch.predicate = predicate
+            do {
+                return try viewContext.fetch(fetch)
+            } catch {
+                fatalError()
+            }
+        } else {
+            do {
+                return try viewContext.fetch(fetch)
+            } catch {
+                fatalError()
+            }
         }
     }
     
     // MARK: - Core Data Saving support
     
     func saveContext () {
-        let context = persistentContainer.viewContext
+        let context = persistentContainer.newBackgroundContext()
         if context.hasChanges {
             do {
                 try context.save()

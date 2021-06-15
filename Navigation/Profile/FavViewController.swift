@@ -9,13 +9,42 @@
 import UIKit
 
 class FavViewController: UIViewController {
+    
+    private var filterItem: String?
 
+    @IBAction func filterAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Фильтр по автору", message: "Укажите автора поста для фильтрации", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        let filter = UIAlertAction(title: "Применить", style: .default) { [weak self] (action) in
+            guard let text = alert.textFields?[0].text else {
+                return
+            }
+            self?.filterItem = text
+            self?.tableView.reloadData()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(filter)
+        alert.addTextField(configurationHandler: nil)
+        present(alert, animated: true)
+    }
+    
+    @IBAction func clearFilterAction(_ sender: Any) {
+        filterItem = nil
+        self.tableView.reloadData()
+    }
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
     var dataStorage: DataStorage?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         setupTable()
         setupViews()
     }
@@ -24,6 +53,7 @@ class FavViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
     }
     private func setupViews() {
@@ -42,6 +72,8 @@ class FavViewController: UIViewController {
 extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     var cellHeight: CGFloat {return (view.frame.width - 24 - (8*3)) / (view.frame.width * 4)}
     
+   
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -49,7 +81,7 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataModel = DataStorageModel()
         dataStorage = DataStorage(dataStorage: dataModel)
-        guard let tableSection = dataStorage?.getFavorites().count else {
+        guard let tableSection = dataStorage?.getFavorites(autor: filterItem).count else {
             return 0
         }
         return tableSection
@@ -59,12 +91,12 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
         let dataModel = DataStorageModel()
         dataStorage = DataStorage(dataStorage: dataModel)
-        guard let post = dataStorage?.getFavorites()[indexPath.row],
+        guard let post = dataStorage?.getFavorites(autor: filterItem)[indexPath.row],
               let postForCell = dataStorage?.toPost(post: post) else {
             return UITableViewCell()
         }
         cell.post = postForCell
-        
+
         return cell
     }
     
@@ -76,5 +108,19 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .zero
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Удалить") { [self](action, view, completion) in
+            let dataModel = DataStorageModel()
+            self.dataStorage = DataStorage(dataStorage: dataModel)
+            let post = dataStorage?.getFavorites(autor: filterItem)[indexPath.row]
+            self.dataStorage?.deletePost(post: post!)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        delete.image = UIImage(systemName: "trash")
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        return swipe
+    }
+   
 }
-
