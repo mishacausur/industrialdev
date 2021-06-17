@@ -31,7 +31,6 @@
 		B6E8F040266BA940005DC2A7 /* DataPostModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8F03E266BA940005DC2A7 /* DataPostModel+CoreDataClass.swift */; };
 		B6E8F041266BA940005DC2A7 /* DataPostModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8F03F266BA940005DC2A7 /* DataPostModel+CoreDataProperties.swift */; };
 		B6E8F044266BB7E4005DC2A7 /* FavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8F043266BB7E4005DC2A7 /* FavViewController.swift */; };
-		B6E8F046266C094C005DC2A7 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8F045266C094C005DC2A7 /* DataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +60,6 @@
 		B6E8F03E266BA940005DC2A7 /* DataPostModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPostModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B6E8F03F266BA940005DC2A7 /* DataPostModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataPostModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B6E8F043266BB7E4005DC2A7 /* FavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewController.swift; sourceTree = "<group>"; };
-		B6E8F045266C094C005DC2A7 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +129,6 @@
 				B6E8F03E266BA940005DC2A7 /* DataPostModel+CoreDataClass.swift */,
 				B6E8F03F266BA940005DC2A7 /* DataPostModel+CoreDataProperties.swift */,
 				B67F78FD266BA10700303AD2 /* DataStorageModel.swift */,
-				B6E8F045266C094C005DC2A7 /* DataStorage.swift */,
 				B6E4C19B25C9B04C006ECA56 /* Storage.swift */,
 				B67F78D3266B9DD300303AD2 /* Navigation.xcdatamodeld */,
 			);
@@ -232,7 +229,6 @@
 				B6E8F041266BA940005DC2A7 /* DataPostModel+CoreDataProperties.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				060782CA250CEE7200A87020 /* Post.swift in Sources */,
-				B6E8F046266C094C005DC2A7 /* DataStorage.swift in Sources */,
 				B6E4C19C25C9B04F006ECA56 /* Storage.swift in Sources */,
 				B6DF981326078E12006EA35F /* LoginChecker.swift in Sources */,
 				060782B4250CE27700A87020 /* SceneDelegate.swift in Sources */,

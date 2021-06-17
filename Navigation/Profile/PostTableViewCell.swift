@@ -16,11 +16,14 @@ class PostTableViewCell: UITableViewCell {
    
     var post: PostModel? {
         didSet {
-            autorPost.text = post?.autor
-            descriptionPost.text = post?.description
-            imagePost.image = UIImage.init(imageLiteralResourceName: (post?.imageName)!)
-            likesPost.text = String(post!.likes)
-            viewsPost.text = String(post!.views)
+            guard let postForCell = post else {
+                return
+            }
+            autorPost.text = postForCell.autor
+            descriptionPost.text = postForCell.description
+            imagePost.image = UIImage.init(imageLiteralResourceName: (postForCell.imageName ?? "nopic"))
+            likesPost.text = String(postForCell.likes)
+            viewsPost.text = String(postForCell.views)
         }
     }
     

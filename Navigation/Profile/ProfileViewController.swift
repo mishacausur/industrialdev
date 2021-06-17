@@ -15,13 +15,13 @@ class ProfileViewController: UIViewController {
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
     
-    let dataStorage: DataStorage?
+    let dataStorage: DataStorageModel?
     
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
     }
     
-    init(dataStorageModel: DataStorage) {
+    init(dataStorageModel: DataStorageModel) {
         dataStorage = dataStorageModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,7 +84,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let post = Storage.posts[indexPath.row]
         cell.post = post
         cell.completion = { [weak self] in
-            self!.dataStorage!.saveToFav(post: post)
+            self!.dataStorage!.saveFavoritePost(post: post)
         }
            
        

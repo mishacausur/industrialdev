@@ -27,7 +27,7 @@ class DataStorageModel {
         return persistentContainer.viewContext
     }()
     
-    func favoritePost(post: PostModel) {
+    func saveFavoritePost(post: PostModel) {
         
         let favoritePost = DataPostModel(context: viewContext)
         favoritePost.autor = post.autor
@@ -58,7 +58,7 @@ class DataStorageModel {
             return postModel
     }
     
-    func getFav() -> [DataPostModel] {
+    func getFavoritePosts() -> [DataPostModel] {
         let fetch: NSFetchRequest<DataPostModel> = DataPostModel.fetchRequest()
         do {
             return try viewContext.fetch(fetch)

@@ -12,7 +12,15 @@ class FavViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
-    var dataStorage: DataStorage?
+    var dataModel = DataStorageModel()
+    
+    var dataStorage: [DataPostModel] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        dataStorage = dataModel.getFavoritePosts()
+        super.viewWillAppear(true)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,21 +56,14 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataModel = DataStorageModel()
-        dataStorage = DataStorage(dataStorage: dataModel)
-        guard let tableSection = dataStorage?.getFavorites().count else {
-            return 0
-        }
+        let tableSection = dataModel.getFavoritePosts().count
         return tableSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
-        let dataModel = DataStorageModel()
-        dataStorage = DataStorage(dataStorage: dataModel)
-        guard let post = dataStorage?.getFavorites()[indexPath.row],
-              let postForCell = dataStorage?.toPost(post: post) else {
-            return UITableViewCell()
-        }
+        let post = dataStorage[indexPath.row]
+        let postForCell = dataModel.dataPostToPost(post: post)
         cell.post = postForCell
         
         return cell

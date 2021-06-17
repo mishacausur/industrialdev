@@ -114,8 +114,7 @@ final class LogInViewController: UIViewController {
     
     @objc private func liked() {
         let dataModel = DataStorageModel()
-        let dataStorage = DataStorage(dataStorage: dataModel)
-        let profile = ProfileViewController(dataStorageModel: dataStorage)
+        let profile = ProfileViewController(dataStorageModel: dataModel)
         navigationController?.pushViewController(profile, animated: true)
     }
 
