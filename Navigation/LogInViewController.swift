@@ -16,6 +16,8 @@ protocol LoginViewControllerDelegate {
 
 final class LogInViewController: UIViewController {
     
+    var dataStorage: DataStorageModel!
+    
     var delegate: LoginViewControllerDelegate?
     
     private let scrollView: UIScrollView = {
@@ -110,12 +112,18 @@ final class LogInViewController: UIViewController {
         setupScrollView()
         setupLogInView()
         view.backgroundColor = .white
+        if dataStorage == nil {
+            print("NIIIIIL")
+        }
+        
     }
     
     @objc private func liked() {
-        let dataModel = DataStorageModel()
-        let profile = ProfileViewController(dataStorageModel: dataModel)
-        navigationController?.pushViewController(profile, animated: true)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "profileView")
+        
+       
+        navigationController?.pushViewController(profileVC, animated: true)
     }
 
     private func setupScrollView() {

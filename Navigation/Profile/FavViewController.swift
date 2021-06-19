@@ -12,7 +12,7 @@ class FavViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
-    var dataModel = DataStorageModel()
+    var dataModel: DataStorageModel!
     
     var dataStorage: [DataPostModel] = []
     
@@ -55,8 +55,7 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let dataModel = DataStorageModel()
-        let tableSection = dataModel.getFavoritePosts().count
+        let tableSection = dataStorage.count
         return tableSection
     }
     
