@@ -10,14 +10,20 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    let dataModel = DataStorageModel()
+    
+    var completion: (() -> Void)?
    
     var post: PostModel? {
         didSet {
-            autorPost.text = post?.autor
-            descriptionPost.text = post?.description
-            imagePost.image = UIImage.init(imageLiteralResourceName: String((post?.imageName)!))
-            likesPost.text = String(post!.likes)
-            viewsPost.text = String(post!.views)
+            guard let postForCell = post else {
+                return
+            }
+            autorPost.text = postForCell.autor
+            descriptionPost.text = postForCell.description
+            imagePost.image = UIImage.init(imageLiteralResourceName: (postForCell.imageName ?? "nopic"))
+            likesPost.text = String(postForCell.likes)
+            viewsPost.text = String(postForCell.views)
         }
     }
     
@@ -43,6 +49,7 @@ class PostTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.backgroundColor = .black
+        image.isUserInteractionEnabled = true
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -70,8 +77,16 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func favorite() {
+        completion?()
+        print("okkkkkk")
+    }
+    
     private func setupCell(){
         contentView.addSubviews(autorPost, descriptionPost, imagePost, likesPost, viewsPost)
+        let favoriteRecognizer = UITapGestureRecognizer(target: self, action: #selector(favorite))
+        favoriteRecognizer.numberOfTapsRequired = 2
+        imagePost.addGestureRecognizer(favoriteRecognizer)
         
         let constraints = [
             imagePost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -84,8 +99,6 @@ class PostTableViewCell: UITableViewCell {
             autorPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             autorPost.bottomAnchor.constraint(equalTo: imagePost.topAnchor, constant: -12),
             
-           
-            
             descriptionPost.topAnchor.constraint(equalTo: imagePost.bottomAnchor, constant: 16),
             descriptionPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             descriptionPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -96,14 +109,8 @@ class PostTableViewCell: UITableViewCell {
             
             viewsPost.topAnchor.constraint(equalTo: likesPost.topAnchor),
             viewsPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-            
-            
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
-    
-    
-    
-    
 }

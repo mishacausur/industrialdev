@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    lazy var dataStorage = DataStorageModel()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,8 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        if let tabController = window?.rootViewController as? UITabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LogInViewController {
+        if let tabController = window?.rootViewController as? UITabBarController,
+           let loginNavigation = tabController.viewControllers?[1] as? UINavigationController,
+           let loginController = loginNavigation.viewControllers.first as? LogInViewController,
+           let favoriteNavigation = tabController.viewControllers?.last as? UINavigationController,
+           let favoriteViewController = favoriteNavigation.viewControllers.first as? FavViewController {
             loginController.delegate = LoginChecker()
+            loginController.dataStorage = dataStorage
+            favoriteViewController.dataModel = dataStorage
         }
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DataPostModel" representedClassName="DataPostModel" syncable="YES">
+        <attribute name="autor" attributeType="String"/>
+        <attribute name="imageName" attributeType="String"/>
+        <attribute name="likes" attributeType="String"/>
+        <attribute name="postDescription" attributeType="String"/>
+        <attribute name="views" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="DataPostModel" positionX="-54" positionY="-9" width="128" height="104"/>
+    </elements>
+</model>
