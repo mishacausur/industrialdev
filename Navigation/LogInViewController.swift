@@ -119,10 +119,7 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let profileVC = storyboard.instantiateViewController(withIdentifier: "profileView")
-        
-       
+        let profileVC = ProfileViewController(dataStorageModel: dataStorage)
         navigationController?.pushViewController(profileVC, animated: true)
     }
 

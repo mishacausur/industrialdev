@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
     
-    var dataStorage: DataStorageModel!
+    private let dataStorage: DataStorageModel
     
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
@@ -36,9 +36,6 @@ class ProfileViewController: UIViewController {
         setupTable()
         setupViews()
         view.backgroundColor = UIColor.lightGray
-        guard dataStorage != nil else {
-            fatalError()
-        }
         
     }
     
@@ -87,7 +84,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let post = Storage.posts[indexPath.row]
         cell.post = post
         cell.completion = { [weak self] in
-            self!.dataStorage!.saveFavoritePost(post: post)
+            guard let self = self else {
+                return
+            }
+            self.dataStorage.saveFavoritePost(post: post)
         }
            
        

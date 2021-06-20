@@ -26,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            let loginController = loginNavigation.viewControllers.first as? LogInViewController,
            let favoriteNavigation = tabController.viewControllers?.last as? UINavigationController,
            let favoriteViewController = favoriteNavigation.viewControllers.first as? FavViewController {
-            let profileVC = ProfileViewController(dataStorageModel: dataStorage)
-            loginNavigation.viewControllers.append(profileVC)
             loginController.delegate = LoginChecker()
             loginController.dataStorage = dataStorage
             favoriteViewController.dataModel = dataStorage

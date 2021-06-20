@@ -45,15 +45,15 @@ class DataStorageModel {
         }
     }
     
-    func dataPostToPost(post: DataPostModel) -> PostModel {
+    func dataPostToPost(post: DataPostModel) -> PostModel? {
+       
+        guard let autor = post.autor,
+        let description = post.postDescription,
+        let image = post.imageName,
+        let views = post.views,
+        let likes = post.likes else { return nil }
         
-        let autor = post.autor
-        let description = post.postDescription
-        let image = post.imageName
-        let views = post.views
-        let likes = post.likes
-        
-        let postModel = PostModel(autor: autor!, description: description!, imageName: image!, likes: Int(likes!)!, views: Int(views!)!)
+        let postModel = PostModel(autor: autor, description: description, imageName: image, likes: Int(likes)!, views: Int(views)!)
 
             return postModel
     }

@@ -55,16 +55,6 @@
                     <view key="view" contentMode="scaleToFill" id="cN0-Wt-i5c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1AZ-ig-USB">
-                                <rect key="frame" x="184" y="709" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="Ca1-kw-dKJ" kind="push" id="UAV-7Q-biQ"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Lr2-tw-z4m"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
