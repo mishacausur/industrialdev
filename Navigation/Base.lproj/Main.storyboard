@@ -185,7 +185,18 @@
                         <viewLayoutGuide key="safeArea" id="UGd-jL-x8Z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favorite posts" id="fZY-Xd-Xi8"/>
+                    <navigationItem key="navigationItem" title="Favorite posts" id="fZY-Xd-Xi8">
+                        <barButtonItem key="leftBarButtonItem" title="Фильтр" id="yHW-i8-lLe">
+                            <connections>
+                                <action selector="filterButtonTapped:" destination="zaC-PD-79A" id="WpI-7H-sT0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Очистить" id="cvc-Ep-2aE">
+                            <connections>
+                                <action selector="clearButtonTapped:" destination="zaC-PD-79A" id="qye-gF-5Df"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkg-T3-8IV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

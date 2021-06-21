@@ -32,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        self.save()
+        let context = persistentContainer.newBackgroundContext()
+        self.save(context: context)
     }
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -45,8 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
 
-    func save() {
-        let context = persistentContainer.viewContext
+    func save(context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()

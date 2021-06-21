@@ -27,21 +27,26 @@ class DataStorageModel {
         return persistentContainer.viewContext
     }()
     
+    lazy var backgroundContext: NSManagedObjectContext = {
+            return persistentContainer.newBackgroundContext()
+        }()
+    
     func saveFavoritePost(post: PostModel) {
         
-        let favoritePost = DataPostModel(context: viewContext)
+        let favoritePost = DataPostModel(context: backgroundContext)
         favoritePost.autor = post.autor
         favoritePost.postDescription = post.description
         favoritePost.imageName = post.imageName
         favoritePost.views = String(post.views)
         favoritePost.likes = String(post.likes)
-        
-        do {
-            try viewContext.save()
-            
-        }
-        catch let error {
-            print(error)
+        backgroundContext.perform { [weak self] in
+            do {
+                try self?.backgroundContext.save()
+                
+            }
+            catch let error {
+                print(error)
+            }
         }
     }
     
@@ -58,14 +63,30 @@ class DataStorageModel {
             return postModel
     }
     
-    func getFavoritePosts() -> [DataPostModel] {
+    func getFavoritePosts(autor: String?) -> [DataPostModel] {
         let fetch: NSFetchRequest<DataPostModel> = DataPostModel.fetchRequest()
+        fetch.fetchBatchSize = 5
+        if let autor = autor  {
+            let predicate = NSPredicate(format: "%K == %@", #keyPath(DataPostModel.autor), autor)
+            fetch.predicate = predicate
+        }
         do {
             return try viewContext.fetch(fetch)
         } catch {
             fatalError()
         }
+        
     }
+    
+    func remove(post: DataPostModel) {
+            viewContext.delete(post)
+            do {
+                try viewContext.save()
+            }
+            catch let error {
+                print(error)
+            }
+        }
     
     // MARK: - Core Data Saving support
     
