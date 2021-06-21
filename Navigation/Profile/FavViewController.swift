@@ -14,10 +14,10 @@ class FavViewController: UIViewController {
     
     var dataModel: DataStorageModel!
     
-    var dataStorage: [DataPostModel] = []
+    var items: [DataPostModel] = []
     
     override func viewWillAppear(_ animated: Bool) {
-        dataStorage = dataModel.getFavoritePosts()
+        items = dataModel.getFavoritePosts()
         super.viewWillAppear(true)
         tableView.reloadData()
     }
@@ -55,13 +55,13 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let tableSection = dataStorage.count
+        let tableSection = items.count
         return tableSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
-        let post = dataStorage[indexPath.row]
+        let post = items[indexPath.row]
         let postForCell = dataModel.dataPostToPost(post: post)
         cell.post = postForCell
         
