@@ -9,15 +9,42 @@
 import UIKit
 
 class FavViewController: UIViewController {
-
-    private let tableView = UITableView(frame: .zero, style: .grouped)
     
     var dataModel: DataStorageModel!
     
     var items: [DataPostModel] = []
     
+    private var filterItem: String?
+
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    
+    @IBAction func filterButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Фильтр по автору", message: "Укажите автора поста для фильтрации", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        let filter = UIAlertAction(title: "Применить", style: .default) { [weak self] (action) in
+            guard let text = alert.textFields?[0].text else {
+                return
+            }
+            self?.filterItem = text
+            self?.items = self!.dataModel.getFavoritePosts(autor: self?.filterItem)
+            self?.tableView.reloadData()
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(filter)
+        alert.addTextField(configurationHandler: nil)
+        present(alert, animated: true)
+    }
+    
+    @IBAction func clearButtonTapped(_ sender: Any) {
+        filterItem = nil
+        items = dataModel.getFavoritePosts(autor: filterItem)
+        self.tableView.reloadData()
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
-        items = dataModel.getFavoritePosts()
+        items = dataModel.getFavoritePosts(autor: filterItem)
         super.viewWillAppear(true)
         tableView.reloadData()
     }
@@ -68,6 +95,18 @@ extension FavViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Удалить") { [self](action, view, completion) in
+            let post = self.items[indexPath.row]
+            self.dataModel.remove(post: post)
+            items = dataModel.getFavoritePosts(autor: filterItem)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+          delete.image = UIImage(systemName: "trash")
+          let swipe = UISwipeActionsConfiguration(actions: [delete])
+          return swipe
+      }
  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 250
