@@ -47,7 +47,7 @@ final class LogInViewController: UIViewController {
     private let loginText: UITextField = {
     let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.textColor = .black
+        field.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         field.placeholder = "Email or phone"
         field.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         field.autocapitalizationType = .none
@@ -58,7 +58,7 @@ final class LogInViewController: UIViewController {
     private let passwordText: UITextField = {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
-        field.textColor = .black
+        field.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         field.placeholder = "Password"
         field.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         field.autocapitalizationType = .none
@@ -111,7 +111,7 @@ final class LogInViewController: UIViewController {
         super.viewDidLoad()
         setupScrollView()
         setupLogInView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         if dataStorage == nil {
             print("NIIIIIL")
         }
@@ -119,7 +119,7 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        let profileVC = ProfileViewController(dataStorageModel: dataStorage)
+        let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
     }
 
@@ -259,3 +259,11 @@ extension UIImage {
     }
 }
 
+
+extension UIColor {
+    static func createColor(lightMode: UIColor, darkMode: UIColor) -> UIColor {
+        guard #available(iOS 13.0, *) else { return lightMode }
+        return UIColor { (traitCollection) -> UIColor in
+            return traitCollection.userInterfaceStyle == .light ? lightMode : darkMode }
+    }
+}

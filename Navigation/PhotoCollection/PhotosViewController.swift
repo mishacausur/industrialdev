@@ -34,7 +34,7 @@ class PhotosViewController: UIViewController {
     private func setupCollection() {
         view.addSubview(photoCollectionView)
         photoCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        photoCollectionView.backgroundColor = .white
+        photoCollectionView.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         
         let constraints = [
             photoCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

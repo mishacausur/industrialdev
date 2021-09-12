@@ -44,8 +44,7 @@ class FavViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-//        guard let data = dataModel.getFavoritePosts(autor: filterItem) else { return }
-//        items = data
+        items = dataModel.getFavoritePosts(autor: filterItem)
         super.viewWillAppear(true)
         tableView.reloadData()
     }

@@ -14,28 +14,16 @@ class ProfileViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
-    
-    private let dataStorage: DataStorageModel
-    
+
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
     }
-    
-    init(dataStorageModel: DataStorageModel) {
-        dataStorage = dataStorageModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
         setupViews()
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = UIColor.createColor(lightMode: .lightGray, darkMode: .black)
         
     }
     
@@ -87,7 +75,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let self = self else {
                 return
             }
-            self.dataStorage.saveFavoritePost(post: post)
+
         }
            
        

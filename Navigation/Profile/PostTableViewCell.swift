@@ -32,7 +32,7 @@ class PostTableViewCell: UITableViewCell {
         string.translatesAutoresizingMaskIntoConstraints = false
         string.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         string.numberOfLines = 2
-        string.textColor = .black
+        string.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return string
     }()
     
@@ -41,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         string.translatesAutoresizingMaskIntoConstraints = false
         string.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         string.numberOfLines = 0
-        string.textColor = .systemGray
+        string.textColor = UIColor.createColor(lightMode: .systemGray, darkMode: .white)
         return string
     }()
     
@@ -58,7 +58,7 @@ class PostTableViewCell: UITableViewCell {
         let number = UILabel()
         number.translatesAutoresizingMaskIntoConstraints = false
         number.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        number.textColor = .black
+        number.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return number
     }()
     
