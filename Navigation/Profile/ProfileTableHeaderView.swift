@@ -102,7 +102,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private func labelSettings() {
         labelProfile.text = "Illustrasha"
         labelProfile.font = UIFont.boldSystemFont(ofSize: 18)
-        labelProfile.textColor = UIColor.black
+        labelProfile.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
     }
    
     private func buttonSettings() {
@@ -120,15 +120,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private func statusSettings() {
         statusLabel.text = "Drawing the piano"
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        statusLabel.textColor = .gray
+        statusLabel.textColor = UIColor.createColor(lightMode: .gray, darkMode: .lightGray)
     }
     
     private func resetSettings() {
-        resetStatus.backgroundColor = .white
+        resetStatus.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .darkGray)
         resetStatus.layer.borderWidth = 1
-        resetStatus.layer.borderColor = UIColor.black.cgColor
+        resetStatus.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .white).cgColor
         resetStatus.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        resetStatus.textColor = .black
+        resetStatus.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         resetStatus.layer.cornerRadius = 12
         resetStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
