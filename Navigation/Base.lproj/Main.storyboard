@@ -79,7 +79,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxn-0X-Agz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="-541"/>
+            <point key="canvasLocation" x="768.11594202898561" y="-541.07142857142856"/>
         </scene>
         <!--Feed-->
         <scene sceneID="bye-GP-P6Y">
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zo3-uO-y7P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="743" y="-541"/>
+            <point key="canvasLocation" x="1652.1739130434785" y="-541.07142857142856"/>
         </scene>
         <!--Post-->
         <scene sceneID="9oM-mS-hYy">
@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0c-A3-Zaq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1655" y="-541"/>
+            <point key="canvasLocation" x="2563.768115942029" y="-541.07142857142856"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="4aZ-7w-8te">
@@ -154,7 +154,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDS-fz-flO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2525" y="-541"/>
+            <point key="canvasLocation" x="3434.7826086956525" y="-541.07142857142856"/>
+        </scene>
+        <!--Map Demo-->
+        <scene sceneID="Fj3-vU-9Ay">
+            <objects>
+                <viewController id="9In-AC-R4i" customClass="MapViewController" customModule="Navigation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Ps-xK-Vjl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hnr-Id-WN3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map Demo" largeTitleDisplayMode="always" id="euR-71-jAJ">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="location.fill" catalog="system" id="BLe-Dv-AVF"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wYh-9R-Yo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1304.3478260869567" y="-632.14285714285711"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0O8-tr-oe2">
@@ -169,11 +187,12 @@
                         <segue destination="vyo-r6-qwt" kind="relationship" relationship="viewControllers" id="hck-4Z-BVs"/>
                         <segue destination="lWj-Ic-cCh" kind="relationship" relationship="viewControllers" id="xoH-eH-KBA"/>
                         <segue destination="QLB-lx-RSa" kind="relationship" relationship="viewControllers" id="UfV-E8-IJS"/>
+                        <segue destination="Gkc-YU-9SA" kind="relationship" relationship="viewControllers" id="2bh-Vk-E3e"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqe-LH-kso" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1059" y="-128"/>
+            <point key="canvasLocation" x="-149.27536231884059" y="-128.57142857142856"/>
         </scene>
         <!--Favorite posts-->
         <scene sceneID="vRM-NM-Qgf">
@@ -260,10 +279,31 @@
             </objects>
             <point key="canvasLocation" x="-1046.376811594203" y="663.61607142857144"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="lm8-Mw-d8R">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gkc-YU-9SA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="mappin.and.ellipse" catalog="system" selectedImage="mappin.and.ellipse" id="s4U-ST-63E"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" alpha="0.34999999999999998" contentMode="scaleToFill" id="tg4-eF-xQn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9In-AC-R4i" kind="relationship" relationship="rootViewController" id="BXo-Eg-G7I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NTO-Es-rhu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2214.4927536231885" y="-632.14285714285711"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cl" width="128" height="128"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <namedColor name="accentColor">
