@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
     
     private let locationManager = CLLocationManager()
     
-    private var locations = [CLLocationCoordinate2D]()
+    private var mapLocations = [CLLocationCoordinate2D]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,9 @@ class MapViewController: UIViewController {
     
     private func configureLocationManager() {
         mapView.delegate = self
+        mapView.isScrollEnabled = true
+        mapView.isZoomEnabled = true
+        mapView.isRotateEnabled = true
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -40,6 +43,8 @@ class MapViewController: UIViewController {
         gestureRecognizer.minimumPressDuration = 2
         mapView.addGestureRecognizer(gestureRecognizer)
         
+        let routeGesture = UITapGestureRecognizer(target: self, action: #selector(drawRoute(gestureRecognizer:)))
+        mapView.addGestureRecognizer(routeGesture)
     }
     
     @objc func pinLocation(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -54,7 +59,32 @@ class MapViewController: UIViewController {
             annotation.title = "Точка"
             annotation.subtitle = "Новая точка на карте"
             self.mapView.addAnnotation(annotation)
-            locations.append(touchCoordinates)
+            
+        }
+    }
+    
+    @objc func drawRoute(gestureRecognizer: UITapGestureRecognizer) {
+        let touchPoint = gestureRecognizer.location(in: mapView)
+        let touchCoordinates = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        showRouteOnMap(pickupCoordinate: mapLocations.first!, destinationCoordinate: touchCoordinates)
+    }
+    
+    func showRouteOnMap(pickupCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: pickupCoordinate, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destinationCoordinate, addressDictionary: nil))
+        request.requestsAlternateRoutes = true
+        request.transportType = .automobile
+
+        let directions = MKDirections(request: request)
+
+        directions.calculate { [unowned self] response, error in
+            guard let unwrappedResponse = response else { return }
+
+            if (unwrappedResponse.routes.count > 0) {
+                self.mapView.addOverlay(unwrappedResponse.routes[0].polyline)
+                self.mapView.setVisibleMapRect(unwrappedResponse.routes[0].polyline.boundingMapRect, animated: true)
+            }
         }
     }
     
@@ -100,6 +130,7 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let region = MKCoordinateRegion(center: location, span: span)
+        mapLocations.append(location)
         mapView.setRegion(region, animated: true)
     }
     
@@ -115,8 +146,8 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let render = MKPolylineRenderer(overlay: overlay)
-        render.strokeColor = UIColor.red
-        render.lineWidth = 10
+        render.strokeColor = UIColor.orange
+        render.lineWidth = 5
         render.fillColor = UIColor(red: 0, green: 0.7, blue: 0.9, alpha: 0.5)
         render.lineCap = .round
         
