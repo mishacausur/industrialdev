@@ -15,19 +15,8 @@ class ProfileViewController: UIViewController {
     
     let tapToPics = UITapGestureRecognizer(target: self, action: #selector(tapToPhotos))
     
-    private let dataStorage: DataStorageModel
-    
     @objc func tapToPhotos(sender: UITapGestureRecognizer){
         print("Tapped")
-    }
-    
-    init(dataStorageModel: DataStorageModel) {
-        dataStorage = dataStorageModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     
@@ -87,7 +76,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             guard let self = self else {
                 return
             }
-            self.dataStorage.saveFavoritePost(post: post)
+//            self.dataStorage.saveFavoritePost(post: post)
         }
            
        

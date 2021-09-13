@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import LocalAuthentication
 
 protocol LoginViewControllerDelegate {
     func checkLogin(login: String?) -> Bool
@@ -92,7 +93,30 @@ final class LogInViewController: UIViewController {
         
     }()
     
+    private var authButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black
+        button.setTitle("Auth with ", for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(auth), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
+    @objc func auth() {
+        LocalAuthorizationService.shared.authorizeIfPossible { [self] value in
+            if value {
+                let profileVC = ProfileViewController()
+                navigationController?.pushViewController(profileVC, animated: true)
+            } else {
+                let alert = UIAlertController(title: "Biometric is not available", message: "Use your keyboard to enter password", preferredStyle: .actionSheet)
+                let cancel = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+                alert.addAction(cancel)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
     func alertInvalidData() {
         let alertController = UIAlertController(title: "Пользователь не найден", message: "Неверный логин или пароль", preferredStyle: .alert)
@@ -119,7 +143,7 @@ final class LogInViewController: UIViewController {
     }
     
     @objc private func liked() {
-        let profileVC = ProfileViewController(dataStorageModel: dataStorage)
+        let profileVC = ProfileViewController()
         navigationController?.pushViewController(profileVC, animated: true)
     }
 
@@ -132,7 +156,7 @@ final class LogInViewController: UIViewController {
         scrollView.contentInsetAdjustmentBehavior = .automatic
         view.addSubview(scrollView)
         scrollView.addSubview(wrapperView)
-        wrapperView.addSubviews(imageLogo, commonView, likeButton)
+        wrapperView.addSubviews(imageLogo, commonView, likeButton, authButton)
         commonView.addSubviews(loginView, middleView, passwordView)
         loginView.addSubview(loginText)
         passwordView.addSubview(passwordText)
@@ -190,8 +214,12 @@ final class LogInViewController: UIViewController {
             likeButton.topAnchor.constraint(equalTo: commonView.bottomAnchor, constant: 40),
             likeButton.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -20),
             likeButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 20),
-            likeButton.heightAnchor.constraint(equalToConstant: 50)
-            ]
+            likeButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            authButton.topAnchor.constraint(equalTo: likeButton.bottomAnchor, constant: 20),
+            authButton.trailingAnchor.constraint(equalTo: wrapperView.trailingAnchor, constant: -20),
+            authButton.leadingAnchor.constraint(equalTo: wrapperView.leadingAnchor, constant: 20),
+            authButton.heightAnchor.constraint(equalToConstant: 50)]
         
         NSLayoutConstraint.activate(constraints)
     }
