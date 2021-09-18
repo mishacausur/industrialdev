@@ -23,7 +23,7 @@ class PhotosViewController: UIViewController {
         photoCollectionView.delegate = self
         photoCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: "PicCell")
         navigationController?.navigationBar.isHidden = false
-        title = "Photo Gallery"
+        title = Strings.gallery.localized
     }
     
     override func viewWillDisappear(_ animated: Bool) {

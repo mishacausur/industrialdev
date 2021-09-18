@@ -107,7 +107,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
    
     private func buttonSettings() {
         profileButton.backgroundColor = .blue
-        profileButton.setTitle("Set status", for: .normal)
+        profileButton.setTitle(Strings.buttonSettings.localized, for: .normal)
         profileButton.layer.cornerRadius = 4
         profileButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
@@ -133,7 +133,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         resetStatus.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
     }
     
-    private var statusText: String? = "Write your status"
+    private var statusText: String? = Strings.status.localized
     
     @objc private func statusTextChanged(_ textField: UITextField) {
         if resetStatus.text != nil {

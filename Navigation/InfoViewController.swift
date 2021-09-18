@@ -13,7 +13,7 @@ class InfoViewController: UIViewController {
     let alertButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Show Alert", for: .normal)
+        button.setTitle(Strings.showAlert.localized, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         return button
