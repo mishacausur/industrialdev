@@ -49,7 +49,7 @@ final class LogInViewController: UIViewController {
     let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.textColor = .black
-        field.placeholder = "Email or phone"
+        field.placeholder = Strings.email.localized
         field.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         field.autocapitalizationType = .none
         field.tintColor = UIColor.init(named: "accentColor")
@@ -60,7 +60,7 @@ final class LogInViewController: UIViewController {
         let field = UITextField()
         field.translatesAutoresizingMaskIntoConstraints = false
         field.textColor = .black
-        field.placeholder = "Password"
+        field.placeholder = Strings.password.localized
         field.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         field.autocapitalizationType = .none
         field.tintColor = UIColor.init(named: "accentColor")
@@ -79,7 +79,7 @@ final class LogInViewController: UIViewController {
     private lazy var likeButton: UIButton = {
         
         let button = UIButton()
-        button.setTitle("Log In", for: .normal)
+        button.setTitle(Strings.loginButton.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
@@ -96,7 +96,7 @@ final class LogInViewController: UIViewController {
     private var authButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("Auth with ", for: .normal)
+        button.setTitle(Strings.auth.localized, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(auth), for: .touchUpInside)
@@ -287,3 +287,25 @@ extension UIImage {
     }
 }
 
+extension String {
+    
+}
+
+enum Strings: String {
+    
+    case email
+    case password
+    case loginButton
+    case auth
+    case openPost
+    case addNewPost
+    case showAlert
+    case buttonSettings
+    case status
+    case photos
+    case gallery
+    
+    var localized: String {
+        return NSLocalizedString(rawValue, comment: "")
+    }
+}

@@ -1,0 +1,42 @@
+
+/* Class = "UITabBarItem"; title = "Feed"; ObjectID = "0HN-zR-0uF"; */
+"0HN-zR-0uF.title" = "Новости";
+
+/* Class = "UIButton"; normalTitle = "Show alert"; ObjectID = "7My-cB-a4g"; */
+"7My-cB-a4g.normalTitle" = "Показать предупреждение";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "BLe-Dv-AVF"; */
+"BLe-Dv-AVF.title" = "Айтем";
+
+/* Class = "UINavigationItem"; title = "Feed"; ObjectID = "CTA-33-ygc"; */
+"CTA-33-ygc.title" = "Новости";
+
+/* Class = "UINavigationItem"; title = "Post"; ObjectID = "N0m-Za-SVh"; */
+"N0m-Za-SVh.title" = "Пост";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "SyK-iK-f7q"; */
+"SyK-iK-f7q.title" = "Профиль";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "TPi-FS-zh0"; */
+"TPi-FS-zh0.title" = "Профиль";
+
+/* Class = "UIBarButtonItem"; title = "Очистить"; ObjectID = "cvc-Ep-2aE"; */
+"cvc-Ep-2aE.title" = "Очистить";
+
+/* Class = "UINavigationItem"; title = "Map Demo"; ObjectID = "euR-71-jAJ"; */
+"euR-71-jAJ.title" = "Карта";
+
+/* Class = "UINavigationItem"; title = "Favorite posts"; ObjectID = "fZY-Xd-Xi8"; */
+"fZY-Xd-Xi8.title" = "Избранное";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "s4U-ST-63E"; */
+"s4U-ST-63E.title" = "Карта";
+
+/* Class = "UINavigationItem"; title = "Photos"; ObjectID = "s7A-mo-LFR"; */
+"s7A-mo-LFR.title" = "Фото";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "sup-mz-wZc"; */
+"sup-mz-wZc.normalTitle" = "Кнопка";
+
+/* Class = "UIBarButtonItem"; title = "Фильтр"; ObjectID = "yHW-i8-lLe"; */
+"yHW-i8-lLe.title" = "Фильтр";

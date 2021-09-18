@@ -262,7 +262,7 @@
         <scene sceneID="gwH-fm-Ufo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QLB-lx-RSa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" selectedImage="suit.heart.fill" catalog="system" systemItem="favorites" id="Ieg-N7-kKs">
+                    <tabBarItem key="tabBarItem" title="" selectedImage="suit.heart.fill" catalog="system" systemItem="favorites" id="Ieg-N7-kKs">
                         <color key="badgeColor" name="accentColor"/>
                     </tabBarItem>
                     <toolbarItems/>

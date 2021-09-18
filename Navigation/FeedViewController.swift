@@ -95,7 +95,7 @@ class ContainerView: UIStackView {
     
     let addPostButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Open post", for: .normal)
+        button.setTitle(Strings.openPost.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
@@ -107,7 +107,7 @@ class ContainerView: UIStackView {
     
     let postButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add new post", for: .normal)
+        button.setTitle(Strings.addNewPost.localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true

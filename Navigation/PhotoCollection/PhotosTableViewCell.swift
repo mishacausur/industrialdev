@@ -18,7 +18,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     let label: UILabel = {
         let label = UILabel()
-        label.text = "Photos"
+        label.text = Strings.photos.localized
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
